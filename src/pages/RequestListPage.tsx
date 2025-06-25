@@ -15,63 +15,30 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { mockReferenceRequests } from "@/mocks";
 
 interface RequestListPageProps {
   onNavigate?: (path: string) => void;
 }
 
-interface ReferenceRequest {
-  id: string;
-  talentName: string;
-  talentEmail: string;
-  position: string;
-  status: "pending" | "in_progress" | "completed" | "cancelled";
-  totalCompanies: number;
-  respondedCompanies: number;
-  createdAt: string;
-  dueDate: string;
-}
-
-// Mock data
-const mockRequests: ReferenceRequest[] = [
-  {
-    id: "REQ-001",
-    talentName: "김철수",
-    talentEmail: "kim.cs@email.com",
-    position: "백엔드 개발자",
-    status: "in_progress",
-    totalCompanies: 3,
-    respondedCompanies: 2,
-    createdAt: "2024-03-15",
-    dueDate: "2024-03-22",
-  },
-  {
-    id: "REQ-002",
-    talentName: "이영희",
-    talentEmail: "lee.yh@email.com",
-    position: "프론트엔드 개발자",
-    status: "completed",
-    totalCompanies: 2,
-    respondedCompanies: 2,
-    createdAt: "2024-03-10",
-    dueDate: "2024-03-17",
-  },
-  {
-    id: "REQ-003",
-    talentName: "박민수",
-    talentEmail: "park.ms@email.com",
-    position: "DevOps 엔지니어",
-    status: "pending",
-    totalCompanies: 4,
-    respondedCompanies: 0,
-    createdAt: "2024-03-18",
-    dueDate: "2024-03-25",
-  },
-];
+// Calculate request statistics
+const getRequestStats = () => {
+  return mockReferenceRequests.map((request) => ({
+    ...request,
+    totalCompanies: request.companies.length,
+    respondedCompanies: request.companies.filter(
+      (c) => c.status === "responded"
+    ).length,
+    dueDate: new Date(request.createdAt.getTime() + 7 * 24 * 60 * 60 * 1000), // 7 days after creation
+  }));
+};
 
 const RequestListPage: React.FC<RequestListPageProps> = ({ onNavigate }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
+
+  // Get enhanced requests with statistics
+  const requestsWithStats = getRequestStats();
 
   // Status configurations
   const statusConfig = {
@@ -97,7 +64,7 @@ const RequestListPage: React.FC<RequestListPageProps> = ({ onNavigate }) => {
     },
   };
 
-  const filteredRequests = mockRequests.filter((request) => {
+  const filteredRequests = requestsWithStats.filter((request) => {
     const matchesSearch =
       request.talentName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       request.position.toLowerCase().includes(searchTerm.toLowerCase());
@@ -110,8 +77,12 @@ const RequestListPage: React.FC<RequestListPageProps> = ({ onNavigate }) => {
     onNavigate?.("/request/new");
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("ko-KR", {
+  const handleViewDetail = (requestId: string) => {
+    onNavigate?.(`/request/${requestId}/result`);
+  };
+
+  const formatDate = (date: Date) => {
+    return date.toLocaleDateString("ko-KR", {
       year: "numeric",
       month: "short",
       day: "numeric",
@@ -147,7 +118,7 @@ const RequestListPage: React.FC<RequestListPageProps> = ({ onNavigate }) => {
               </div>
               <div>
                 <p className="text-sm text-gray-600">전체 요청</p>
-                <p className="text-2xl font-bold">{mockRequests.length}</p>
+                <p className="text-2xl font-bold">{requestsWithStats.length}</p>
               </div>
             </div>
           </CardContent>
@@ -163,7 +134,7 @@ const RequestListPage: React.FC<RequestListPageProps> = ({ onNavigate }) => {
                 <p className="text-sm text-gray-600">진행중</p>
                 <p className="text-2xl font-bold">
                   {
-                    mockRequests.filter((r) => r.status === "in_progress")
+                    requestsWithStats.filter((r) => r.status === "in_progress")
                       .length
                   }
                 </p>
@@ -181,7 +152,10 @@ const RequestListPage: React.FC<RequestListPageProps> = ({ onNavigate }) => {
               <div>
                 <p className="text-sm text-gray-600">완료</p>
                 <p className="text-2xl font-bold">
-                  {mockRequests.filter((r) => r.status === "completed").length}
+                  {
+                    requestsWithStats.filter((r) => r.status === "completed")
+                      .length
+                  }
                 </p>
               </div>
             </div>
@@ -323,7 +297,11 @@ const RequestListPage: React.FC<RequestListPageProps> = ({ onNavigate }) => {
                     </div>
 
                     <div className="flex items-center gap-2 ml-4">
-                      <Button variant="outline" size="sm">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleViewDetail(request.id)}
+                      >
                         <Eye className="h-4 w-4 mr-1" />
                         상세보기
                       </Button>

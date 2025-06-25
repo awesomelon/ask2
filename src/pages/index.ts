@@ -27,7 +27,10 @@ export { InboxPage } from "./InboxPage";
 // Request Management
 export { default as NewRequestWizard } from "./NewRequestWizard";
 export { default as RequestListPage } from "./RequestListPage";
-// export { ResultPage } from './ResultPage';
+export { RequestDetailPage } from "./RequestDetailPage";
+export { ResponsePage } from "./ResponsePage";
+export { ConsentPage } from "./ConsentPage";
+export { RejectPage } from "./RejectPage";
 // export { ResultDetailPage } from './ResultDetailPage';
 
 // Response & Consent

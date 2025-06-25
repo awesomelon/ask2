@@ -9,63 +9,59 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { useDashboard } from "@/hooks/useDashboard";
 
 interface DashboardPageProps {
   onNavigate?: (path: string) => void;
 }
 
 export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
-  // Mock data
-  const stats = {
-    totalRequests: 24,
-    inProgress: 8,
-    completed: 16,
-    responseRate: 85,
+  const { stats, recentRequests, recentReceivedRequests, loading, error } =
+    useDashboard();
+
+  const handleReceivedAction = (status: string, token: string) => {
+    let path = "";
+    switch (status) {
+      case "pending":
+        path = `/respond/${token}`;
+        break;
+      case "responded":
+      case "rejected":
+      case "expired":
+        path = `/respond/${token}`;
+        break;
+      default:
+        return;
+    }
+
+    // 새 창에서 열기
+    window.open(path, "_blank", "noopener,noreferrer");
   };
 
-  const recentRequests = [
-    {
-      id: 1,
-      talentName: "김철수",
-      position: "백엔드 개발자",
-      status: "in-progress",
-      responses: 3,
-      total: 5,
-    },
-    {
-      id: 2,
-      talentName: "이영희",
-      position: "프론트엔드 개발자",
-      status: "completed",
-      responses: 4,
-      total: 4,
-    },
-    {
-      id: 3,
-      talentName: "박민수",
-      position: "DevOps 엔지니어",
-      status: "pending",
-      responses: 1,
-      total: 3,
-    },
-  ];
+  // 로딩 상태
+  if (loading) {
+    return (
+      <div className="space-y-6">
+        <div className="h-8 w-48 bg-gray-200 rounded animate-pulse" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="h-32 bg-gray-200 rounded animate-pulse" />
+          ))}
+        </div>
+        <div className="h-64 bg-gray-200 rounded animate-pulse" />
+      </div>
+    );
+  }
 
-  const recentResponses = [
-    {
-      id: 1,
-      talentName: "홍길동",
-      position: "PM",
-      company: "ABC회사",
-      status: "pending",
-    },
-    {
-      id: 2,
-      talentName: "김영수",
-      position: "개발자",
-      company: "XYZ회사",
-      status: "completed",
-    },
-  ];
+  // 에러 상태
+  if (error) {
+    return (
+      <div className="space-y-6">
+        <h1 className="text-3xl font-bold text-gray-900">대시보드</h1>
+        <p className="text-red-600">{error}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -91,7 +87,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.totalRequests}</div>
-            <p className="text-xs text-muted-foreground">전월 대비 +12%</p>
+            <p className="text-xs text-muted-foreground">이번 달 요청 수</p>
           </CardContent>
         </Card>
 
@@ -123,8 +119,8 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
             <div className="h-4 w-4 text-muted-foreground">📈</div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.responseRate}%</div>
-            <Progress value={stats.responseRate} className="mt-2" />
+            <div className="text-2xl font-bold">{stats.responseRate || 0}%</div>
+            <Progress value={stats.responseRate || 0} className="mt-2" />
           </CardContent>
         </Card>
       </div>
@@ -139,46 +135,52 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {recentRequests.map((request) => (
-              <div
-                key={request.id}
-                className="flex items-center justify-between p-4 border rounded-lg"
-              >
-                <div className="flex-1">
-                  <h3 className="font-medium">{request.talentName}</h3>
-                  <p className="text-sm text-gray-600">{request.position}</p>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <div className="text-sm text-gray-600">
-                    {request.responses}/{request.total} 응답
-                  </div>
-                  <Badge
-                    variant={
-                      request.status === "completed"
-                        ? "default"
-                        : request.status === "in-progress"
-                        ? "secondary"
-                        : "outline"
-                    }
-                  >
-                    {request.status === "completed"
-                      ? "완료"
-                      : request.status === "in-progress"
-                      ? "진행중"
-                      : "대기중"}
-                  </Badge>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() =>
-                      onNavigate?.(`/request/${request.id}/result`)
-                    }
-                  >
-                    보기
-                  </Button>
-                </div>
+            {recentRequests.length === 0 ? (
+              <div className="text-center py-8 text-gray-500">
+                아직 생성한 평판 요청이 없습니다.
               </div>
-            ))}
+            ) : (
+              recentRequests.map((request) => (
+                <div
+                  key={request.id}
+                  className="flex items-center justify-between p-4 border rounded-lg"
+                >
+                  <div className="flex-1">
+                    <h3 className="font-medium">{request.talentName}</h3>
+                    <p className="text-sm text-gray-600">{request.position}</p>
+                  </div>
+                  <div className="flex items-center space-x-4">
+                    <div className="text-sm text-gray-600">
+                      {request.responses}/{request.total} 응답
+                    </div>
+                    <Badge
+                      variant={
+                        request.status === "completed"
+                          ? "default"
+                          : request.status === "in_progress"
+                          ? "secondary"
+                          : "outline"
+                      }
+                    >
+                      {request.status === "completed"
+                        ? "완료"
+                        : request.status === "in_progress"
+                        ? "진행중"
+                        : "대기중"}
+                    </Badge>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() =>
+                        onNavigate?.(`/request/${request.id}/result`)
+                      }
+                    >
+                      보기
+                    </Button>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
           <div className="mt-4 text-center">
             <Button variant="outline" onClick={() => onNavigate?.("/requests")}>
@@ -198,35 +200,49 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {recentResponses.map((response) => (
-              <div
-                key={response.id}
-                className="flex items-center justify-between p-4 border rounded-lg"
-              >
-                <div className="flex-1">
-                  <h3 className="font-medium">{response.talentName}</h3>
-                  <p className="text-sm text-gray-600">
-                    {response.position} • {response.company}
-                  </p>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <Badge
-                    variant={
-                      response.status === "completed" ? "default" : "outline"
-                    }
-                  >
-                    {response.status === "completed" ? "응답완료" : "응답대기"}
-                  </Badge>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => onNavigate?.(`/respond/${response.id}`)}
-                  >
-                    {response.status === "completed" ? "보기" : "응답하기"}
-                  </Button>
-                </div>
+            {recentReceivedRequests.length === 0 ? (
+              <div className="text-center py-8 text-gray-500">
+                아직 수신한 평판 요청이 없습니다.
               </div>
-            ))}
+            ) : (
+              recentReceivedRequests.map((response) => (
+                <div
+                  key={response.id}
+                  className="flex items-center justify-between p-4 border rounded-lg"
+                >
+                  <div className="flex-1">
+                    <h3 className="font-medium">{response.talentName}</h3>
+                    <p className="text-sm text-gray-600">
+                      {response.position} • {response.company}
+                    </p>
+                  </div>
+                  <div className="flex items-center space-x-4">
+                    <Badge
+                      variant={
+                        response.status === "responded" ? "default" : "outline"
+                      }
+                    >
+                      {response.status === "responded"
+                        ? "응답완료"
+                        : response.status === "pending"
+                        ? "응답대기"
+                        : response.status === "rejected"
+                        ? "거절"
+                        : "만료"}
+                    </Badge>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() =>
+                        handleReceivedAction(response.status, response.token)
+                      }
+                    >
+                      {response.status === "pending" ? "응답하기" : "보기"}
+                    </Button>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
           <div className="mt-4 text-center">
             <Button variant="outline" onClick={() => onNavigate?.("/inbox")}>

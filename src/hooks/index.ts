@@ -11,3 +11,5 @@ export {};
 
 // Export all hooks from this file
 export { useToast } from "./use-toast";
+export { useInbox } from "./useInbox";
+export { useDashboard } from "./useDashboard";

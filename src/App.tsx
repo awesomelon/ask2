@@ -21,6 +21,10 @@ import {
   DocumentationPage,
   NewRequestWizard,
   RequestListPage,
+  RequestDetailPage,
+  ResponsePage,
+  ConsentPage,
+  RejectPage,
 } from "@/pages";
 
 // Custom hook for navigation
@@ -67,6 +71,26 @@ const DocumentationPageWrapper = () => {
 const RequestListPageWrapper = () => {
   const { navigate } = useAppNavigation();
   return <RequestListPage onNavigate={navigate} />;
+};
+
+const RequestDetailPageWrapper = () => {
+  const { navigate } = useAppNavigation();
+  return <RequestDetailPage onNavigate={navigate} />;
+};
+
+const ResponsePageWrapper = () => {
+  const { navigate } = useAppNavigation();
+  return <ResponsePage onNavigate={navigate} />;
+};
+
+const ConsentPageWrapper = () => {
+  const { navigate } = useAppNavigation();
+  return <ConsentPage onNavigate={navigate} />;
+};
+
+const RejectPageWrapper = () => {
+  const { navigate } = useAppNavigation();
+  return <RejectPage onNavigate={navigate} />;
 };
 
 // Public Layout Component
@@ -254,10 +278,7 @@ function App() {
                 path="/request/:id/result"
                 element={
                   <ProtectedDashboardLayout>
-                    <PlaceholderPage
-                      title="평판 요청 결과"
-                      description="평판 요청의 결과를 확인하는 페이지입니다."
-                    />
+                    <RequestDetailPageWrapper />
                   </ProtectedDashboardLayout>
                 }
               />
@@ -273,31 +294,11 @@ function App() {
                   </ProtectedDashboardLayout>
                 }
               />
+              <Route path="/respond/:token" element={<ResponsePageWrapper />} />
 
               {/* Response & Consent Routes (Public) */}
-              <Route
-                path="/consent/:token"
-                element={
-                  <PublicLayout>
-                    <PlaceholderPage
-                      title="동의 확인"
-                      description="평판 요청에 대한 동의를 확인하는 페이지입니다."
-                    />
-                  </PublicLayout>
-                }
-              />
-
-              <Route
-                path="/respond/:token"
-                element={
-                  <PublicLayout>
-                    <PlaceholderPage
-                      title="평판 응답"
-                      description="평판 요청에 응답하는 페이지입니다."
-                    />
-                  </PublicLayout>
-                }
-              />
+              <Route path="/consent/:token" element={<ConsentPageWrapper />} />
+              <Route path="/reject/:token" element={<RejectPageWrapper />} />
 
               {/* Additional utility routes */}
               <Route
