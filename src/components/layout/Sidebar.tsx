@@ -241,18 +241,27 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </nav>
       </div>
 
-      {/* Collapse Toggle (Desktop only) */}
-      {!isCollapsed && (
-        <div className="border-t border-gray-200 p-2">
-          <button
-            onClick={onToggle}
-            className="group flex w-full items-center rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-          >
-            <ChevronRight className="h-5 w-5 rotate-180" />
+      {/* Collapse/Expand Toggle (Desktop only) */}
+      <div className="border-t border-gray-200 p-2">
+        <button
+          onClick={onToggle}
+          className={cn(
+            "group flex w-full items-center rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors",
+            isCollapsed ? "justify-center px-4 py-2" : "px-3 py-2"
+          )}
+          title={isCollapsed ? "사이드바 펼치기" : "사이드바 접기"}
+        >
+          <ChevronRight
+            className={cn(
+              "h-5 w-5 transition-transform",
+              isCollapsed ? "" : "rotate-180"
+            )}
+          />
+          {!isCollapsed && (
             <span className="ml-3 flex-1 text-left">사이드바 접기</span>
-          </button>
-        </div>
-      )}
+          )}
+        </button>
+      </div>
     </div>
   );
 };
