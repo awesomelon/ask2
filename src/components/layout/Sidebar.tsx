@@ -11,6 +11,7 @@ import {
   Users,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useInbox } from "@/hooks/useInbox";
 
 interface SidebarItem {
   id: string;
@@ -36,6 +37,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onNavigate,
   onToggle,
 }) => {
+  // 수신함 데이터 가져오기
+  const { stats } = useInbox();
+
   // 부모 메뉴인지 확인하는 함수
   const isParentMenu = (item: Omit<SidebarItem, "active">) => {
     return item.children && item.children.length > 0;
@@ -68,7 +72,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       label: "수신함",
       icon: <Inbox className="h-5 w-5" />,
       path: "/inbox",
-      badge: 5,
+      badge: stats.pending > 0 ? stats.pending : undefined,
     },
     {
       id: "requests",

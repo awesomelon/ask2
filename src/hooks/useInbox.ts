@@ -9,6 +9,7 @@ import {
   findMockRequestById,
   mockUsers,
 } from "@/mocks/referenceRequests";
+import { isTokenRejected, getRejectionInfo } from "@/mocks/rejectionRecords";
 import type { ReferenceRequest } from "@/types";
 
 // 수신함 아이템 타입 정의
@@ -68,11 +69,18 @@ export const useInbox = () => {
       let respondedAt: Date | undefined;
       let rejectionReason: string | undefined;
 
-      if (isTokenExpired(token.token) && !token.isUsed) {
+      // 거절 여부 확인
+      const isRejected = isTokenRejected(token.token);
+      const rejectionInfo = isRejected ? getRejectionInfo(token.token) : null;
+
+      if (isRejected && rejectionInfo) {
+        status = "rejected";
+        rejectionReason = rejectionInfo.reason;
+        respondedAt = rejectionInfo.rejectedAt;
+      } else if (isTokenExpired(token.token) && !token.isUsed) {
         status = "expired";
       } else if (token.isUsed) {
-        // 실제로는 응답 데이터를 확인해서 거절인지 응답인지 구분해야 함
-        // 목업에서는 usedAt이 있으면 응답 완료로 가정
+        // 거절되지 않고 사용된 토큰은 응답 완료
         status = "responded";
         respondedAt = token.usedAt;
       } else {
