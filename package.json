@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.1.14",
@@ -31,21 +33,39 @@
   },
   "devDependencies": {
     "@axe-core/react": "^4.10.2",
+    "@chromatic-com/storybook": "^4.0.1",
     "@eslint/js": "^9.29.0",
+    "@storybook/addon-a11y": "^9.0.13",
+    "@storybook/addon-docs": "^9.0.13",
+    "@storybook/addon-essentials": "^8.6.14",
+    "@storybook/addon-interactions": "^8.6.14",
+    "@storybook/addon-links": "^9.0.13",
+    "@storybook/addon-onboarding": "^9.0.13",
+    "@storybook/addon-vitest": "^9.0.13",
+    "@storybook/blocks": "^8.6.14",
+    "@storybook/react": "^9.0.13",
+    "@storybook/react-vite": "^9.0.13",
+    "@storybook/testing-library": "^0.2.2",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react": "^4.5.2",
+    "@vitest/browser": "^3.2.4",
+    "@vitest/coverage-v8": "^3.2.4",
     "autoprefixer": "^10.4.21",
     "eslint": "^9.29.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
+    "eslint-plugin-storybook": "^9.0.13",
     "globals": "^16.2.0",
+    "playwright": "^1.53.1",
     "postcss": "^8.5.6",
+    "storybook": "^9.0.13",
     "tailwindcss": "^3.4.0",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.34.1",
-    "vite": "^7.0.0"
+    "vite": "^7.0.0",
+    "vitest": "^3.2.4"
   }
 }

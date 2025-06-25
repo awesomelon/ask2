@@ -79,20 +79,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
       label: "평판 요청",
       icon: <UserPlus className="h-5 w-5" />,
       path: "/requests",
-      children: [
-        {
-          id: "my-requests",
-          label: "내 요청",
-          icon: null,
-          path: "/requests",
-        },
-        {
-          id: "new-request",
-          label: "새 요청",
-          icon: null,
-          path: "/request/new",
-        },
-      ],
     },
     {
       id: "analytics",
