@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/routing/ProtectedRoute";
+import { ErrorBoundary } from "@/components/common/ErrorBoundary"; // Import ErrorBoundary
 import { DashboardLayout, MainLayout } from "@/components/layout";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -27,93 +28,7 @@ import {
   RejectPage,
 } from "@/pages";
 
-// Custom hook for navigation
-const useAppNavigation = () => {
-  const navigate = useNavigate();
-
-  const handleNavigate = (path: string) => {
-    navigate(path);
-  };
-
-  return { navigate: handleNavigate };
-};
-
-// Page wrapper components that provide navigation
-const LandingPageWrapper = () => {
-  const { navigate } = useAppNavigation();
-  return <LandingPage onNavigate={navigate} />;
-};
-
-const LoginPageWrapper = () => {
-  const { navigate } = useAppNavigation();
-  return <LoginPage onNavigate={navigate} />;
-};
-
-const CorporateSignupPageWrapper = () => {
-  const { navigate } = useAppNavigation();
-  return <CorporateSignupPage onNavigate={navigate} />;
-};
-
-const DashboardPageWrapper = () => {
-  const { navigate } = useAppNavigation();
-  return <DashboardPage onNavigate={navigate} />;
-};
-
-const InboxPageWrapper = () => {
-  const { navigate } = useAppNavigation();
-  return <InboxPage onNavigate={navigate} />;
-};
-
-const DocumentationPageWrapper = () => {
-  return <DocumentationPage />;
-};
-
-const RequestListPageWrapper = () => {
-  const { navigate } = useAppNavigation();
-  return <RequestListPage onNavigate={navigate} />;
-};
-
-const RequestDetailPageWrapper = () => {
-  const { navigate } = useAppNavigation();
-  return <RequestDetailPage onNavigate={navigate} />;
-};
-
-const ResponsePageWrapper = () => {
-  const { navigate } = useAppNavigation();
-  return <ResponsePage onNavigate={navigate} />;
-};
-
-const ConsentPageWrapper = () => {
-  const { navigate } = useAppNavigation();
-  return <ConsentPage onNavigate={navigate} />;
-};
-
-const RejectPageWrapper = () => {
-  const { navigate } = useAppNavigation();
-  return <RejectPage onNavigate={navigate} />;
-};
-
-// Public Layout Component
-const PublicLayout: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const { navigate } = useAppNavigation();
-
-  return <MainLayout onNavigate={navigate}>{children}</MainLayout>;
-};
-
-// Protected Dashboard Layout Component
-const ProtectedDashboardLayout: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const { navigate } = useAppNavigation();
-
-  return (
-    <ProtectedRoute>
-      <DashboardLayout onNavigate={navigate}>{children}</DashboardLayout>
-    </ProtectedRoute>
-  );
-};
+import { Outlet } from "react-router-dom";
 
 // Placeholder components for routes not yet implemented
 const PlaceholderPage: React.FC<{ title: string; description?: string }> = ({
@@ -134,173 +49,142 @@ const PlaceholderPage: React.FC<{ title: string; description?: string }> = ({
   </div>
 );
 
+// Layout component for public pages
+const PublicLayout = () => {
+  const navigate = useNavigate();
+  return (
+    <MainLayout onNavigate={navigate}>
+      <Outlet />
+    </MainLayout>
+  );
+};
+
+// Layout component for protected dashboard pages
+const ProtectedDashboardLayout = () => {
+  const navigate = useNavigate();
+  return (
+    <ProtectedRoute>
+      <DashboardLayout onNavigate={navigate}>
+        <Outlet />
+      </DashboardLayout>
+    </ProtectedRoute>
+  );
+};
+
 function App() {
   return (
     <AuthProvider>
       <Router>
-        <div className="App">
-          {/* Skip Link for Accessibility */}
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-white px-4 py-2 rounded-md z-50"
-          >
-            메인 콘텐츠로 건너뛰기
-          </a>
+        <ErrorBoundary>
+          <div className="App">
+            {/* Skip Link for Accessibility */}
+            <a
+              href="#main-content"
+              className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-white px-4 py-2 rounded-md z-50"
+            >
+              메인 콘텐츠로 건너뛰기
+            </a>
 
-          <main id="main-content">
-            <Routes>
-              {/* Public Routes */}
-              <Route path="/" element={<LandingPageWrapper />} />
-              <Route path="/login" element={<LoginPageWrapper />} />
+            <main id="main-content">
+              <Routes>
+                {/* Public Routes without specific layout (e.g., Landing, Login) */}
+                <Route path="/" element={<LandingPage />} />
+              <Route path="/login" element={<LoginPage />} />
               <Route
                 path="/signup/corporate"
-                element={<CorporateSignupPageWrapper />}
+                element={<CorporateSignupPage />}
               />
 
-              {/* Public pages with layout */}
-              <Route
-                path="/docs"
-                element={
-                  <PublicLayout>
-                    <DocumentationPageWrapper />
-                  </PublicLayout>
-                }
-              />
+              {/* Public pages with MainLayout */}
+              <Route element={<PublicLayout />}>
+                <Route path="/docs" element={<DocumentationPage />} />
+                <Route
+                  path="/help"
+                  element={
+                    <PlaceholderPage
+                      title="도움말"
+                      description="ASK2 사용법과 자주 묻는 질문입니다."
+                    />
+                  }
+                />
+              </Route>
 
               {/* Protected Dashboard Routes */}
-              <Route
-                path="/dashboard"
-                element={
-                  <ProtectedDashboardLayout>
-                    <DashboardPageWrapper />
-                  </ProtectedDashboardLayout>
-                }
-              />
-
-              <Route
-                path="/inbox"
-                element={
-                  <ProtectedDashboardLayout>
-                    <InboxPageWrapper />
-                  </ProtectedDashboardLayout>
-                }
-              />
-
-              <Route
-                path="/settings"
-                element={
-                  <ProtectedDashboardLayout>
+              <Route element={<ProtectedDashboardLayout />}>
+                <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/inbox" element={<InboxPage />} />
+                <Route
+                  path="/settings"
+                  element={
                     <PlaceholderPage
                       title="설정"
                       description="사용자 설정 페이지입니다."
                     />
-                  </ProtectedDashboardLayout>
-                }
-              />
-
-              {/* Analytics Routes */}
-              <Route
-                path="/analytics"
-                element={
-                  <ProtectedDashboardLayout>
+                  }
+                />
+                <Route
+                  path="/analytics"
+                  element={
                     <PlaceholderPage
                       title="분석 리포트"
                       description="평판 요청 및 응답에 대한 분석 리포트입니다."
                     />
-                  </ProtectedDashboardLayout>
-                }
-              />
-
-              {/* Organization Management Routes */}
-              <Route
-                path="/organization"
-                element={<Navigate to="/organization/members" replace />}
-              />
-
-              <Route
-                path="/organization/members"
-                element={
-                  <ProtectedDashboardLayout>
+                  }
+                />
+                <Route
+                  path="/organization"
+                  element={<Navigate to="/organization/members" replace />}
+                />
+                <Route
+                  path="/organization/members"
+                  element={
                     <PlaceholderPage
                       title="조직 구성원"
                       description="조직의 구성원을 관리하는 페이지입니다."
                     />
-                  </ProtectedDashboardLayout>
-                }
-              />
-
-              <Route
-                path="/organization/settings"
-                element={
-                  <ProtectedDashboardLayout>
+                  }
+                />
+                <Route
+                  path="/organization/settings"
+                  element={
                     <PlaceholderPage
                       title="조직 설정"
                       description="조직의 설정을 관리하는 페이지입니다."
                     />
-                  </ProtectedDashboardLayout>
-                }
-              />
-
-              {/* Request Management Routes */}
-
-              {/* Request List Page */}
-              <Route
-                path="/requests"
-                element={
-                  <ProtectedDashboardLayout>
-                    <RequestListPageWrapper />
-                  </ProtectedDashboardLayout>
-                }
-              />
-
-              <Route
-                path="/request/new"
-                element={
-                  <ProtectedDashboardLayout>
-                    <NewRequestWizard />
-                  </ProtectedDashboardLayout>
-                }
-              />
-
-              <Route
-                path="/request/my"
-                element={
-                  <ProtectedDashboardLayout>
+                  }
+                />
+                <Route path="/requests" element={<RequestListPage />} />
+                <Route path="/request/new" element={<NewRequestWizard />} />
+                <Route
+                  path="/request/my"
+                  element={
                     <PlaceholderPage
                       title="내 요청"
                       description="내가 생성한 평판 요청 목록을 확인하는 페이지입니다."
                     />
-                  </ProtectedDashboardLayout>
-                }
-              />
-
-              <Route
-                path="/request/:id/result"
-                element={
-                  <ProtectedDashboardLayout>
-                    <RequestDetailPageWrapper />
-                  </ProtectedDashboardLayout>
-                }
-              />
-
-              <Route
-                path="/request/:id/result/detail"
-                element={
-                  <ProtectedDashboardLayout>
+                  }
+                />
+                <Route
+                  path="/request/:id/result"
+                  element={<RequestDetailPage />}
+                />
+                <Route
+                  path="/request/:id/result/detail"
+                  element={
                     <PlaceholderPage
                       title="상세 결과"
                       description="평판 요청의 상세 결과를 확인하는 페이지입니다."
                     />
-                  </ProtectedDashboardLayout>
-                }
-              />
-              <Route path="/respond/:token" element={<ResponsePageWrapper />} />
+                  }
+                />
+              </Route>
 
-              {/* Response & Consent Routes (Public) */}
-              <Route path="/consent/:token" element={<ConsentPageWrapper />} />
-              <Route path="/reject/:token" element={<RejectPageWrapper />} />
+              {/* Routes accessible publicly but might not need full MainLayout */}
+              <Route path="/respond/:token" element={<ResponsePage />} />
+              <Route path="/consent/:token" element={<ConsentPage />} />
+              <Route path="/reject/:token" element={<RejectPage />} />
 
-              {/* Additional utility routes */}
+              {/* Additional utility routes (can be grouped under PublicLayout or have their own) */}
               <Route
                 path="/forgot-password"
                 element={
@@ -308,18 +192,6 @@ function App() {
                     title="비밀번호 재설정"
                     description="비밀번호 재설정 페이지입니다."
                   />
-                }
-              />
-
-              <Route
-                path="/help"
-                element={
-                  <PublicLayout>
-                    <PlaceholderPage
-                      title="도움말"
-                      description="ASK2 사용법과 자주 묻는 질문입니다."
-                    />
-                  </PublicLayout>
                 }
               />
 
@@ -339,6 +211,7 @@ function App() {
           {/* Global Toast Notifications */}
           <Toaster />
         </div>
+        </ErrorBoundary>
       </Router>
     </AuthProvider>
   );

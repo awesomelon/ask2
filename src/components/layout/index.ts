@@ -17,14 +17,13 @@ export {
   DashboardPage,
   useDashboardLayout,
 } from "./DashboardLayout";
-export {
-  MainLayout,
-  LandingLayout,
-  AuthLayout,
-  DocsLayout,
-  ErrorLayout,
-  PublicPageLayout,
-} from "./MainLayout";
+export { MainLayout } from "./MainLayout";
+export { LandingLayout } from "./variants/LandingLayout";
+export { AuthLayout } from "./variants/AuthLayout";
+export { DocsLayout } from "./variants/DocsLayout";
+export { ErrorLayout } from "./variants/ErrorLayout";
+export { PublicPageLayout } from "./variants/PublicPageLayout";
+
 
 // Example:
 // export { PageContainer } from './page-container';
