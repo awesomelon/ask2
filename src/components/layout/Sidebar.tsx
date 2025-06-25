@@ -162,7 +162,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             isActive
               ? "bg-primary text-white"
               : "text-gray-700 hover:bg-gray-100 hover:text-gray-900",
-            isCollapsed && !isChild && "justify-center px-2"
+            isCollapsed && !isChild && "justify-center px-4"
           )}
         >
           {item.icon && (
@@ -173,7 +173,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
           {!isCollapsed && (
             <>
-              <span className="ml-3 flex-1 text-left">{item.label}</span>
+              <span
+                className={cn(
+                  "flex-1 text-left",
+                  item.icon ? "ml-3" : isChild ? "ml-2" : "ml-3"
+                )}
+              >
+                {item.label}
+              </span>
               {item.badge && (
                 <span
                   className={cn(
