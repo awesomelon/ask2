@@ -1,0 +1,991 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Project Initialization and Environment Setup",
+        "description": "Set up the initial project structure using Vite with React and TypeScript template, and install all required dependencies.",
+        "details": "1. Create a new project using Vite with React-TypeScript template\n2. Install core dependencies:\n   - react-router-dom for routing\n   - @tanstack/react-query for data fetching\n   - axios for API requests\n   - tailwindcss, postcss, autoprefixer for styling\n   - @radix-ui packages for shadcn/ui components\n3. Configure tailwindcss\n4. Set up the project folder structure as specified in the PRD:\n   - src/components/ (with ui/, layout/, common/ subfolders)\n   - src/pages/\n   - src/hooks/\n   - src/utils/\n   - src/styles/\n   - src/types/\n   - src/mocks/\n5. Initialize Git repository and create initial commit",
+        "testStrategy": "Verify that the project builds successfully with 'yarn dev' and that all dependencies are correctly installed. Check that the folder structure matches the requirements and that tailwindcss is properly configured.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "done",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Vite Project with React-TypeScript Template",
+            "description": "Initialize a new project using Vite with React and TypeScript template as the foundation for the application.",
+            "dependencies": [],
+            "details": "Run 'npm create vite@latest my-app --template react-ts' to create the project. Navigate into the project directory with 'cd my-app'. Run 'npm install' to install the base dependencies. Verify the project structure and ensure it builds correctly with 'npm run dev'.\n<info added on 2025-06-24T11:10:51.353Z>\nProject successfully created using Vite with React-TypeScript template.\n\nExecution details:\n- Used 'yarn create vite . --template react-ts' to create the project in the current directory\n- Proceeded with project scaffolding while ignoring existing files\n- Completed installation of base dependencies with 'yarn install'\n- Verified successful development server startup with 'yarn dev'\n\nNext step: Install and configure additional dependencies\n</info added on 2025-06-24T11:10:51.353Z>",
+            "status": "done",
+            "testStrategy": "Verify the development server starts without errors and the default Vite React page loads in the browser."
+          },
+          {
+            "id": 2,
+            "title": "Install and Configure Required Dependencies",
+            "description": "Install all the required third-party libraries and packages needed for the project.",
+            "dependencies": [
+              1
+            ],
+            "details": "Run 'npm install react-router-dom @tanstack/react-query axios tailwindcss postcss autoprefixer' to install core dependencies. Install Radix UI components with 'npm install @radix-ui/react-dialog @radix-ui/react-dropdown-menu @radix-ui/react-toast' (add other required Radix components). Run 'npx tailwindcss init -p' to create tailwind.config.js and postcss.config.js files. Configure tailwind.config.js to include all template paths: content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'].\n<info added on 2025-06-24T11:14:05.370Z>\nAll required dependencies have been successfully installed.\n\nInstalled packages:\n**Core Libraries:**\n- react-router-dom@7.6.2 (routing)\n- @tanstack/react-query@5.81.2 (data fetching)\n- axios@1.10.0 (HTTP client)\n\n**Styling:**\n- tailwindcss@4.1.10 (CSS framework)\n- postcss@8.5.6 (CSS post-processing)\n- autoprefixer@10.4.21 (vendor prefixes)\n\n**UI Components (Radix UI):**\n- @radix-ui/react-dialog@1.1.14\n- @radix-ui/react-dropdown-menu@2.1.15\n- @radix-ui/react-toast@1.2.14\n- @radix-ui/react-tabs@1.1.12\n- @radix-ui/react-select@2.2.5\n- @radix-ui/react-alert-dialog@1.1.14\n- @radix-ui/react-progress@1.1.7\n\n**Configuration Files Created:**\n- tailwind.config.js (including custom color palette)\n- postcss.config.js (configured with Tailwind CSS and Autoprefixer plugins)\n</info added on 2025-06-24T11:14:05.370Z>",
+            "status": "done",
+            "testStrategy": "Verify all packages are correctly listed in package.json and that there are no dependency conflicts or installation errors."
+          },
+          {
+            "id": 3,
+            "title": "Set Up Project Folder Structure",
+            "description": "Create the recommended folder structure for organizing code according to the PRD specifications.",
+            "dependencies": [
+              1
+            ],
+            "details": "Create the following directories in the src folder: components/ (with ui/, layout/, and common/ subfolders), pages/, hooks/, utils/, styles/, types/, and mocks/. Add appropriate .gitkeep files to empty directories to ensure they're tracked by Git. Create basic index.ts files in each directory to enable clean imports. Add README.md files in key directories explaining their purpose and usage guidelines.\n<info added on 2025-06-24T11:18:47.965Z>\n✅ PRD에 명시된 프로젝트 폴더 구조가 성공적으로 생성되었습니다.\n\n생성된 폴더 구조:\n```\nsrc/\n├── components/        # 재사용 가능한 컴포넌트\n│   ├── ui/           # shadcn/ui 컴포넌트 (index.ts, .gitkeep)\n│   ├── layout/       # 레이아웃 컴포넌트 (index.ts, .gitkeep)\n│   ├── common/       # 공통 컴포넌트 (index.ts, .gitkeep)\n│   ├── index.ts      # 전체 컴포넌트 export\n│   └── README.md     # 컴포넌트 폴더 설명\n├── pages/            # 페이지 컴포넌트 (index.ts, README.md, .gitkeep)\n├── hooks/            # 커스텀 훅 (index.ts, .gitkeep)\n├── utils/            # 유틸리티 함수 (index.ts, .gitkeep)\n├── styles/           # 전역 스타일 (.gitkeep)\n├── types/            # TypeScript 타입 정의 (index.ts, .gitkeep)\n└── mocks/            # 목업 데이터 (index.ts, .gitkeep)\n```\n\n각 폴더별 설정:\n- 모든 폴더에 index.ts 파일로 export 경로 설정\n- .gitkeep 파일로 빈 폴더 Git 추적 보장\n- 주요 폴더에 README.md로 사용법 문서화\n- 각 index.ts에 예시 주석과 placeholder export 추가\n\n다음 단계: 기본 스타일링 및 테마 구성\n</info added on 2025-06-24T11:18:47.965Z>",
+            "status": "done",
+            "testStrategy": "Verify all directories exist and follow the specified structure. Ensure index.ts files are properly set up for exports."
+          },
+          {
+            "id": 4,
+            "title": "Configure Base Styling and Theme",
+            "description": "Set up the base styling configuration with Tailwind CSS and create global style files.",
+            "dependencies": [
+              2
+            ],
+            "details": "Create src/styles/globals.css with @tailwind directives (@tailwind base, @tailwind components, @tailwind utilities). Import globals.css in main.tsx. Create a theme.css file for custom CSS variables if needed. Set up any custom Tailwind theme extensions in tailwind.config.js including colors, fonts, and spacing. Add any required font imports to index.html.\n<info added on 2025-06-24T11:25:06.395Z>\n전역 스타일 설정:\n- src/styles/globals.css 생성 완료 (@tailwind base, @tailwind components, @tailwind utilities 포함)\n- 커스텀 컴포넌트 클래스 정의 (.btn, .card, .input 등) 추가\n- 커스텀 스크롤바 스타일링 구현\n\nTailwind CSS 설정:\n- Tailwind CSS v3.4.17 버전 사용\n- tailwind.config.js에 커스텀 primary 컬러 팔레트 설정 완료\n- postcss.config.js 구성 완료\n\n폰트 및 타이핑:\n- Inter 폰트를 Google Fonts에서 로드하도록 설정\n- index.html에 한국어 설정 및 ASK2 타이틀 추가\n- main.tsx에서 globals.css 성공적으로 import\n\n빌드 검증:\n- yarn build 명령어로 빌드 검증 완료\n- CSS 번들링 및 최적화 정상 작동 확인\n- 모든 스타일링 설정 검증 완료\n</info added on 2025-06-24T11:25:06.395Z>",
+            "status": "done",
+            "testStrategy": "Verify Tailwind styles are properly applied to elements. Check that custom theme variables work as expected by testing with sample elements."
+          },
+          {
+            "id": 5,
+            "title": "Initialize Git Repository and Create Initial Commit",
+            "description": "Set up version control for the project using Git and create the initial commit with the base project structure.",
+            "dependencies": [
+              3,
+              4
+            ],
+            "details": "Create a .gitignore file with appropriate entries for node_modules, dist, .env files, and IDE-specific files. Initialize Git repository with 'git init'. Create a README.md file with project name, description, setup instructions, and other relevant information. Stage all files with 'git add .'. Create the initial commit with 'git commit -m \"Initial project setup with Vite, React, TypeScript, and dependencies\"'. Optionally, create a remote repository on GitHub/GitLab and push the initial commit.\n<info added on 2025-06-24T11:26:49.659Z>\n✅ Git 리포지토리 초기화 및 첫 커밋이 성공적으로 완료되었습니다.\n\n완료된 작업:\n**Git 리포지토리 상태 확인:**\n- Git이 이미 main 브랜치로 초기화되어 있음을 확인\n- .gitignore 파일이 올바르게 설정되어 있음을 검증\n\n**파일 스테이징:**\n- 총 82개 파일이 Git에 추가됨\n- 프로젝트 구조 파일 (src/, public/, 설정 파일들)\n- Taskmaster AI 관련 파일들 (.taskmaster/, 규칙 파일들)\n- 개발 환경 설정 파일들 (package.json, tsconfig.json 등)\n\n**초기 커밋 생성:**\n- 커밋 ID: a2044fc\n- 의미 있는 커밋 메시지로 프로젝트 초기화 내용 기록\n- 12,109줄의 변경사항 포함\n- 모든 프로젝트 초기 설정 작업을 하나의 커밋으로 기록\n\n**버전 관리 준비 완료:**\n- 향후 개발 진행을 위한 Git 기반 확립\n- 체계적인 커밋 히스토리 시작점 마련\n</info added on 2025-06-24T11:26:49.659Z>",
+            "status": "done",
+            "testStrategy": "Verify that the Git repository is properly initialized, .gitignore is working correctly, and the initial commit contains all the expected files."
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "TypeScript Type Definitions",
+        "description": "Create TypeScript interfaces for the core data models as specified in the PRD.",
+        "details": "Create a file at src/types/index.ts with the following interfaces:\n\n```typescript\nexport interface User {\n  id: string;\n  email: string;\n  name: string;\n  type: \"corporate\" | \"talent\";\n  organization?: Organization;\n}\n\nexport interface Organization {\n  id: string;\n  name: string;\n  domain: string;\n  verified: boolean;\n}\n\nexport interface ReferenceRequest {\n  id: string;\n  talentName: string;\n  talentEmail: string;\n  position: string;\n  status: \"pending\" | \"in_progress\" | \"completed\";\n  companies: RequestCompany[];\n  createdAt: Date;\n}\n\nexport interface RequestCompany {\n  organization: Organization;\n  respondents: User[];\n  status: \"pending\" | \"responded\" | \"rejected\";\n}\n```\n\nAdd any additional types needed for the application, such as form state types, API response types, etc.",
+        "testStrategy": "Verify that the types compile without errors. Create sample objects using these interfaces to ensure they match the expected data structure.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "done",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Base User and Organization Interfaces",
+            "description": "Implement the core User and Organization interfaces as specified in the PRD",
+            "dependencies": [],
+            "details": "Create the src/types/index.ts file and implement the User and Organization interfaces exactly as specified in the PRD. Ensure proper typing for all fields, especially the User.type field which should be a union type of 'corporate' | 'talent'.\n<info added on 2025-06-24T11:30:57.258Z>\nImplementation completed for User and Organization interfaces as specified in the PRD.\n\nCreated:\n- src/types/index.ts with the following interfaces:\n  - User interface with id, email, name, type (\"corporate\" | \"talent\") fields and optional organization field for corporate users\n  - Organization interface with id, name, domain, and verified fields to manage company verification status\n\nAdded type validation through:\n- src/types/test-samples.ts with sample data objects\n- Test cases covering corporate users, individual users, and verified/unverified companies\n- Successful TypeScript compiler validation (yarn tsc --noEmit)\n\nAll implementations follow the PRD specifications exactly.\n</info added on 2025-06-24T11:30:57.258Z>",
+            "status": "done",
+            "testStrategy": "Verify the interfaces with TypeScript compiler to ensure no type errors."
+          },
+          {
+            "id": 2,
+            "title": "Implement ReferenceRequest and RequestCompany Interfaces",
+            "description": "Add the ReferenceRequest and RequestCompany interfaces to complete the core data models",
+            "dependencies": [
+              1
+            ],
+            "details": "Add the ReferenceRequest and RequestCompany interfaces to the src/types/index.ts file. Ensure proper typing for all fields, especially the status fields which should be union types as specified. Make sure the interfaces reference each other correctly (e.g., RequestCompany references Organization).\n<info added on 2025-06-24T11:33:54.667Z>\nI've implemented the ReferenceRequest and RequestCompany interfaces in the src/types/index.ts file with the following details:\n\n1. Status type definitions:\n   - ReferenceRequestStatus: \"pending\" | \"in_progress\" | \"completed\"\n   - RequestCompanyStatus: \"pending\" | \"responded\" | \"rejected\"\n\n2. RequestCompany interface for tracking individual company participation:\n   - organization: Reference to Organization interface\n   - respondents: List of respondents\n   - status: Current response status\n   - Timestamp fields (requestedAt, respondedAt)\n   - Optional rejectionReason field\n\n3. ReferenceRequest interface for complete reference check requests:\n   - Talent information (talentName, talentEmail, position)\n   - Overall request status and list of participating companies\n   - Metadata including creation/modification times, creator, and notes\n\n4. Created comprehensive sample data in src/types/test-samples.ts:\n   - Sample RequestCompany objects in various states\n   - Complex ReferenceRequest samples with multiple companies\n   - Type validation functions to test state transitions\n\nAll implementations have been verified with the TypeScript compiler and correctly model the relationships between entities and their possible state transitions.\n</info added on 2025-06-24T11:33:54.667Z>",
+            "status": "done",
+            "testStrategy": "Create sample objects that implement these interfaces to verify type correctness."
+          },
+          {
+            "id": 3,
+            "title": "Create API Request and Response Types",
+            "description": "Define TypeScript interfaces for API requests and responses",
+            "dependencies": [
+              2
+            ],
+            "details": "Create interfaces for API requests and responses based on the core data models. Include types like GetUserResponse, CreateReferenceRequestPayload, etc. Consider pagination, error responses, and authentication-related types. Export these from the same types file.\n<info added on 2025-06-24T11:37:30.753Z>\n# API Interface Implementation\n\n## Common API Types\n- Implemented `ApiResponse<T>` generic wrapper for standardized API responses\n- Created `ApiError` structure for consistent error handling\n- Defined `PaginationParams` for list endpoint pagination\n\n## Authentication API Types\n- Added `LoginRequest/LoginResponse` supporting both standard login and Magic Link\n- Implemented `CorporateSignupRequest` for company registration flow\n- Created `RefreshTokenRequest` for JWT token renewal\n\n## Reference Request API Types\n- Defined `CreateReferenceRequestRequest` for creating new reference requests\n- Added `UpdateReferenceRequestRequest` for modifying existing requests\n- Implemented `ReferenceRequestListParams` with filtering and pagination\n- Created `SubmitReferenceResponseRequest` for submitting reference responses\n\n## Organization/User API Types\n- Added `OrganizationSearchParams` for company search functionality\n- Implemented `OrganizationVerificationRequest` for company verification\n- Created `UpdateUserProfileRequest` for user profile modifications\n- Defined `ChangePasswordRequest` for password changes\n\n## Validation and Testing\n- Created comprehensive sample data for all API types\n- Covered both success and failure response scenarios\n- Implemented `validateApiTypes()` function to verify type safety\n- All types pass TypeScript compiler checks (yarn tsc --noEmit)\n- Successfully implemented generic types and inheritance relationships\n\n## Implementation Files\n- src/types/index.ts - All API type definitions\n- src/types/test-samples.ts - API type samples and validation functions\n</info added on 2025-06-24T11:37:30.753Z>",
+            "status": "done",
+            "testStrategy": "Mock API responses and verify they conform to the defined types."
+          },
+          {
+            "id": 4,
+            "title": "Implement Form State Types",
+            "description": "Create TypeScript interfaces for form states used throughout the application",
+            "dependencies": [
+              2
+            ],
+            "details": "Define interfaces for form states related to user registration, reference requests, and other interactive components. Include validation states, error messages, and form submission states. Consider using Partial<T> and Pick<T> utility types where appropriate to derive form types from the core data models.\n<info added on 2025-06-24T11:42:08.975Z>\nForm state interfaces have been implemented with a comprehensive type system:\n\n1. Core form state interfaces:\n   - `BaseFormState` with common properties (isSubmitting, isSubmitted, isDirty, error, success)\n   - `FieldError` for individual field validation errors\n   - `FormErrors<T>` generic type for mapping form errors\n\n2. Authentication form states:\n   - `LoginFormState` for standard login\n   - `MagicLinkFormState` with linkSent flag\n   - `CorporateSignupFormState` for multi-step corporate signup\n\n3. Reference request form states:\n   - `ReferenceRequestWizardState` with 5-step wizard tracking\n   - `ReferenceResponseFormState` with auto-save and consent tracking\n\n4. User management form states:\n   - `UserProfileFormState` with changesSaved flag\n   - `PasswordChangeFormState` with password strength metrics\n\n5. Search and filtering form states:\n   - `SearchFilterFormState` with active filters tracking\n   - `OrganizationSearchFormState` for organization search\n\nImplementation includes sample data for all form states in various stages and validation functions. All types are properly defined in src/types/index.ts with samples in src/types/test-samples.ts. TypeScript compiler validation confirms correct implementation of generic types, inheritance relationships, and multi-step form modeling.\n</info added on 2025-06-24T11:42:08.975Z>",
+            "status": "done",
+            "testStrategy": "Create sample form state objects and verify they conform to the defined types."
+          },
+          {
+            "id": 5,
+            "title": "Add Utility Types and Type Guards",
+            "description": "Create utility types and type guard functions to enhance type safety",
+            "dependencies": [
+              3,
+              4
+            ],
+            "details": "Implement utility types like Readonly versions of core models, union types for different states, and discriminated unions where appropriate. Add type guard functions (e.g., isUser, isOrganization) to perform runtime type checking. Consider adding JSDoc comments to document complex types. Export all types from the index.ts file.\n<info added on 2025-06-24T11:51:53.514Z>\n## Final Implementation Summary\n\nAll utility types and type guards have been implemented and are working correctly:\n\n### Utility Types Implemented:\n- `DeepPartial<T>` - Makes all properties in T optional recursively\n- `DeepRequired<T>` - Makes all properties in T required recursively  \n- `KeysOfType<T,U>` - Extracts keys from T that have values of type U\n- `ValueOf<T>` - Extracts all possible values from T\n- `PickStringFields<T>` - Extracts only string fields from T\n- `EntityId<T>` - Strongly typed entity IDs with branding\n- `UserId`, `OrganizationId`, `ReferenceRequestId` - Specific entity ID types\n- `LoadingState` - Async operation states: \"idle\" | \"loading\" | \"success\" | \"error\"\n- `Result<T,E>` - Success/error result type with discriminated union\n- `AsyncState<T,E>` - Async state management with data and error\n- `FormField<T>` - Form field wrapper with validation state\n- `ClickHandler`, `ChangeHandler<T>`, `SubmitHandler<T>` - Event handler types\n\n### Type Guards Implemented:\n- `isCorporateUser`, `isTalentUser` - User type discrimination\n- `isVerifiedOrganization` - Organization verification status\n- `isCompletedRequest`, `isInProgressRequest` - Request status checking\n- `hasCompanyResponded`, `wasCompanyRequestRejected` - Company response status\n- `isApiSuccess`, `isApiError` - API response type guards\n- `hasFormErrors` - Form validation checking\n- `isNotNullish` - Null/undefined checking\n- `isValidEmail` - Email format validation\n- `isValidEntityId` - Entity ID validation\n- `isLoading`, `isAsyncSuccess`, `isAsyncError` - Async state checking\n\n### Technical Issues Fixed:\n- Removed unused type imports from test-samples.ts\n- Fixed DeepPartial sample to have complete Organization object\n- All TypeScript compiler errors resolved\n- Added comprehensive sample data and validation functions\n\n### Files:\n- src/types/index.ts - All type definitions and type guards\n- src/types/test-samples.ts - Sample data and validation functions  \n\nAll types compile successfully and provide strong type safety for the application. The implementation includes comprehensive JSDoc documentation and covers all the complex type patterns needed for the ASK2 application.\n</info added on 2025-06-24T11:51:53.514Z>",
+            "status": "done",
+            "testStrategy": "Write unit tests for type guards to ensure they correctly identify types at runtime."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Mock Data Implementation",
+        "description": "Create mock data for users, organizations, and reference requests to be used during development.",
+        "details": "Create a file at src/mocks/data.ts with mock data for development:\n\n```typescript\nimport { User, Organization, ReferenceRequest, RequestCompany } from '../types';\n\nexport const mockOrganizations: Organization[] = [\n  {\n    id: 'org1',\n    name: 'ABC회사',\n    domain: 'abc.com',\n    verified: true\n  },\n  {\n    id: 'org2',\n    name: 'XYZ기업',\n    domain: 'xyz.co.kr',\n    verified: true\n  }\n];\n\nexport const mockUsers: User[] = [\n  {\n    id: '1',\n    email: 'hong@abc.com',\n    name: '홍길동',\n    type: 'corporate',\n    organization: mockOrganizations[0]\n  },\n  {\n    id: '2',\n    email: 'kim@xyz.co.kr',\n    name: '김영희',\n    type: 'corporate',\n    organization: mockOrganizations[1]\n  }\n];\n\nexport const mockRequestCompanies: RequestCompany[] = [\n  {\n    organization: mockOrganizations[0],\n    respondents: [mockUsers[0]],\n    status: 'responded'\n  },\n  {\n    organization: mockOrganizations[1],\n    respondents: [mockUsers[1]],\n    status: 'pending'\n  }\n];\n\nexport const mockRequests: ReferenceRequest[] = [\n  {\n    id: 'req1',\n    talentName: '김철수',\n    talentEmail: 'kim@personal.com',\n    position: '백엔드 개발자',\n    status: 'in_progress',\n    companies: [mockRequestCompanies[0], mockRequestCompanies[1]],\n    createdAt: new Date('2024-03-15')\n  },\n  {\n    id: 'req2',\n    talentName: '이영희',\n    talentEmail: 'lee@gmail.com',\n    position: '프론트엔드 개발자',\n    status: 'pending',\n    companies: [mockRequestCompanies[1]],\n    createdAt: new Date('2024-03-20')\n  }\n];\n```\n\nCreate at least 5-10 mock entries for each type to have sufficient data for testing various UI states.",
+        "testStrategy": "Verify that the mock data conforms to the defined TypeScript interfaces. Test importing the mock data in a component to ensure it can be used without type errors.",
+        "priority": "medium",
+        "dependencies": [
+          2
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create mock data for organizations",
+            "description": "Expand the mockOrganizations array to include 5-10 diverse organization entries with varied properties",
+            "dependencies": [],
+            "details": "Create at least 8 organization objects with the Organization type. Include a mix of verified and unverified organizations, different domains (corporate, educational, government), and varied name formats (Korean, English, mixed). Ensure each organization has a unique ID and domain.",
+            "status": "pending",
+            "testStrategy": "Verify that all organization objects conform to the Organization type and have unique IDs and domains."
+          },
+          {
+            "id": 2,
+            "title": "Create mock data for users",
+            "description": "Expand the mockUsers array to include 5-10 diverse user entries with varied properties and organization affiliations",
+            "dependencies": [
+              1
+            ],
+            "details": "Create at least 10 user objects with the User type. Include users from different organizations (reference the mockOrganizations array), with different types ('corporate', 'personal'), and varied name formats. Ensure each user has a unique ID and email that matches their organization's domain for corporate users.",
+            "status": "pending",
+            "testStrategy": "Verify that all user objects conform to the User type, have unique IDs, and that corporate users have emails matching their organization's domain."
+          },
+          {
+            "id": 3,
+            "title": "Create mock data for request companies",
+            "description": "Expand the mockRequestCompanies array to include varied company request scenarios",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Create at least 8 RequestCompany objects representing different request scenarios. Include all possible status values ('pending', 'responded', 'declined'), different combinations of respondents (single, multiple, none), and reference different organizations from mockOrganizations. Ensure there's a good distribution of different statuses for testing UI states.",
+            "status": "pending",
+            "testStrategy": "Verify that all RequestCompany objects properly reference existing organizations and users, and include all possible status values."
+          },
+          {
+            "id": 4,
+            "title": "Create mock data for reference requests",
+            "description": "Expand the mockRequests array to include 5-10 diverse reference request entries",
+            "dependencies": [
+              3
+            ],
+            "details": "Create at least 8 ReferenceRequest objects with varied properties. Include all possible status values ('pending', 'in_progress', 'completed', 'cancelled'), different numbers of companies per request, varied positions, and creation dates spanning several months. Ensure each request has a unique ID and references valid RequestCompany objects.",
+            "status": "pending",
+            "testStrategy": "Verify that all ReferenceRequest objects conform to the type, have unique IDs, and reference valid RequestCompany objects. Test that the data covers all possible request statuses."
+          },
+          {
+            "id": 5,
+            "title": "Create utility functions for mock data manipulation",
+            "description": "Implement helper functions to manipulate mock data for testing different scenarios",
+            "dependencies": [
+              4
+            ],
+            "details": "Create utility functions in src/mocks/utils.ts that allow for: 1) Filtering requests by status, 2) Finding users by organization, 3) Generating a new mock request with specified properties, 4) Updating the status of existing requests, and 5) Filtering requests by date range. These functions will help simulate API behavior during development.",
+            "status": "pending",
+            "testStrategy": "Test each utility function with various inputs to ensure they correctly manipulate the mock data and return expected results."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "UI Component Library Setup",
+        "description": "Set up the UI component library based on shadcn/ui components with the specified styling guidelines.",
+        "details": "1. Set up the basic UI components in src/components/ui/ folder:\n   - Button (primary, secondary, outline variants)\n   - Input (text, email, password types)\n   - Select/Dropdown\n   - Card\n   - Modal/Dialog\n   - Table\n   - Tabs\n   - Progress/Stepper\n   - Badge\n   - Alert/Toast\n\n2. Implement the color palette as specified in the PRD:\n   - Primary: Blue shades\n   - Secondary: Gray shades\n   - Success: Green shades\n   - Warning: Yellow shades\n   - Danger: Red shades\n\n3. Implement typography styles:\n   - Headings: font-bold text-2xl\n   - Subheadings: font-semibold text-lg\n   - Body: text-base\n   - Caption: text-sm text-gray-600\n\n4. Implement component styles:\n   - Card: rounded-lg shadow-md p-6\n   - Button: rounded-md px-4 py-2\n   - Input: border rounded-md px-3 py-2\n\n5. Ensure all components are accessible with proper ARIA attributes and keyboard navigation support.",
+        "testStrategy": "Create a storybook-like page that displays all UI components with their variants. Test components for accessibility using keyboard navigation and screen readers. Verify that components match the design specifications.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "done",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Set up project structure and install dependencies",
+            "description": "Initialize the component library structure and install necessary dependencies for shadcn/ui integration.",
+            "dependencies": [],
+            "details": "1. Create the src/components/ui/ folder structure\n2. Install shadcn/ui CLI tool with npm/yarn\n3. Set up the necessary configuration files (tailwind.config.js, components.json)\n4. Configure the color palette variables in the CSS variables\n5. Set up the typography base styles in the global CSS file\n<info added on 2025-06-24T12:03:16.176Z>\n## 완료된 작업들\n\n1. **필요한 유틸리티 패키지 설치**:\n   - class-variance-authority: 컴포넌트 variants 관리\n   - clsx: 클래스 조합 유틸리티  \n   - tailwind-merge: Tailwind CSS 클래스 병합\n   - tailwindcss-animate: 애니메이션 플러그인\n\n2. **Import Alias 설정**:\n   - tsconfig.app.json에 \"@/*\": [\"./src/*\"] 경로 매핑 추가\n   - vite.config.ts에 \"@\": \"/src\" 별칭 설정\n   - erasableSyntaxOnly 옵션 오류 수정\n\n3. **CN 유틸리티 함수 생성**:\n   - src/lib/utils.ts에 clsx와 tailwind-merge를 조합한 cn() 함수 구현\n   - shadcn/ui 컴포넌트에서 사용할 핵심 유틸리티 함수\n\n4. **Tailwind CSS 설정 업데이트**:\n   - CSS 변수 기반 색상 시스템으로 변경\n   - 다크모드 지원 설정\n   - shadcn/ui 애니메이션 keyframes 추가\n   - 반응형 container 설정\n\n5. **글로벌 CSS 변수 설정**:\n   - Light/Dark 테마 CSS 변수 정의\n   - 기존 하드코딩된 색상을 CSS 변수로 변경\n   - Primary, Secondary, Destructive 등 semantic 색상 체계 구축\n\n6. **Components.json 설정**:\n   - shadcn/ui CLI 설정 파일 생성\n   - TypeScript, CSS Variables 사용 설정\n   - 컴포넌트 경로 alias 설정\n\n## 검증 완료\n- TypeScript 컴파일 성공 (yarn tsc --noEmit)\n- 모든 필수 패키지 설치 완료\n- 프로젝트 구조 준비 완료\n</info added on 2025-06-24T12:03:16.176Z>",
+            "status": "done",
+            "testStrategy": "Verify that all dependencies are correctly installed and the project structure is properly set up by running a simple component test."
+          },
+          {
+            "id": 2,
+            "title": "Implement basic input components",
+            "description": "Create the foundational input components following the design specifications.",
+            "dependencies": [],
+            "details": "1. Implement Button component with primary, secondary, and outline variants\n2. Create Input component supporting text, email, and password types\n3. Develop Select/Dropdown component\n4. Apply the specified styling (rounded-md px-4 py-2 for buttons, border rounded-md px-3 py-2 for inputs)\n5. Ensure proper focus states and accessibility attributes\n<info added on 2025-06-24T12:07:59.013Z>\n1. Implemented Button component with 6 variants (default, secondary, outline, destructive, ghost, link) and 4 sizes (sm, default, lg, icon) using class-variance-authority\n2. Added asChild pattern support with @radix-ui/react-slot integration\n3. Created Input component with support for all HTML input types and file upload functionality\n4. Developed Select component using @radix-ui/react-select with keyboard navigation, scroll buttons, and animation support\n5. Integrated Lucide-react icons for consistent visual elements\n6. Established component export system in src/components/ui/index.ts with TypeScript type definitions\n7. Created ComponentDemo.tsx for testing all components with their variants and states\n8. Verified accessibility features including focus states and proper ARIA attributes\n9. Confirmed TypeScript compilation and styling implementation\n</info added on 2025-06-24T12:07:59.013Z>",
+            "status": "done",
+            "testStrategy": "Test each component with different states (hover, focus, disabled) and ensure they render correctly with the specified styles."
+          },
+          {
+            "id": 3,
+            "title": "Implement container and layout components",
+            "description": "Create the components used for containing and organizing content.",
+            "dependencies": [],
+            "details": "1. Implement Card component with rounded-lg shadow-md p-6 styling\n2. Create Modal/Dialog component with proper overlay and focus trapping\n3. Develop Table component with responsive behavior\n4. Implement Tabs component with proper keyboard navigation\n5. Ensure all components follow the color palette defined in the PRD\n<info added on 2025-06-24T12:16:16.469Z>\n1. Implemented Card component with rounded-lg shadow-md p-6 styling\n   - Created Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter components\n   - Built a fully configurable card layout system\n   - Added forwardRef support for ref passing\n   - Supports various use cases including statistic cards and content cards\n\n2. Created Modal/Dialog component with proper overlay and focus trapping\n   - Based on @radix-ui/react-dialog for a complete modal system\n   - Implemented portal-based overlay rendering\n   - Added keyboard navigation and ESC key support\n   - Included full ARIA attribute accessibility support\n   - Implemented animations (fade, zoom effects)\n   - Created DialogHeader, DialogFooter, DialogTitle, DialogDescription components\n\n3. Developed Table component with responsive behavior\n   - Implemented responsive design for various screen sizes\n   - Added support for complex data presentation\n\n4. Implemented Tabs component with proper keyboard navigation\n   - Based on @radix-ui/react-tabs\n   - Added keyboard navigation support (arrow key movement)\n   - Included visual indication for active tabs\n   - Created TabsList, TabsTrigger, TabsContent components\n   - Implemented full accessibility support\n\n5. Added Badge component with variant system\n   - Used class-variance-authority for variant management\n   - Implemented 4 variants: default, secondary, destructive, outline\n   - Optimized for status indicators and category displays\n\n6. Created Progress component for progress indication\n   - Based on @radix-ui/react-progress\n   - Added animation support for smooth progress changes\n   - Implemented percentage-based progress display\n   - Included screen reader accessibility\n\n7. Developed Alert component with variant system\n   - Used class-variance-authority for variants\n   - Implemented 2 variants: default, destructive\n   - Created AlertTitle and AlertDescription subcomponents\n   - Added icon and text combination for notification system\n   - Included role=\"alert\" accessibility attribute\n\n8. Established integrated export system\n   - All components exported via src/components/ui/index.ts\n   - Implemented consistent naming and type definitions\n   - Added tree-shaking support\n\n9. Ensured all components follow the color palette defined in the PRD\n</info added on 2025-06-24T12:16:16.469Z>",
+            "status": "done",
+            "testStrategy": "Test the components with various content sizes and screen widths to ensure responsive behavior and proper styling."
+          },
+          {
+            "id": 4,
+            "title": "Implement feedback and status components",
+            "description": "Create components used for user feedback and status indication.",
+            "dependencies": [],
+            "details": "1. Implement Progress/Stepper component\n2. Create Badge component with different status variants\n3. Develop Alert/Toast component with success, warning, and danger variants\n4. Apply the color palette (success: green, warning: yellow, danger: red)\n5. Ensure proper animation for toast notifications\n<info added on 2025-06-24T12:23:29.560Z>\n1. Implemented Toast notification system (`toast.tsx`, `toaster.tsx`, `use-toast.ts`)\n   - Radix UI-based complete Toast system\n   - Four variants: default, success, warning, destructive\n   - Animation and gesture support (swipe to dismiss)\n   - useToast Hook for programmatic control\n   - Portal rendering for global notifications\n\n2. Implemented Tooltip component (`tooltip.tsx`)\n   - Radix UI-based tooltip system\n   - Support for 4 directional positions (top, right, bottom, left)\n   - Keyboard accessibility support\n   - Animation effects\n\n3. Implemented Loading Spinner (`spinner.tsx`)\n   - Four sizes: sm, default, lg, xl\n   - Three variants: default, secondary, muted\n   - Consistent variant management with Class Variance Authority\n   - CSS animations applied\n\nTechnical implementation details:\n- Full TypeScript support for all components\n- Compliance with shadcn/ui design system\n- CSS variable-based theme system\n- forwardRef pattern for ref forwarding\n- Complete accessibility (A11y) support\n\nDemo page updates:\n- Added demonstrations for all new components in ComponentDemo.tsx\n- Interactive Toast buttons\n- Tooltip examples in various positions\n- Display of all Spinner sizes and variants\n- Included practical usage examples\n\nGlobal configuration:\n- Added Toaster component to App.tsx to enable global Toast notifications\n- Enabled global Tooltip functionality with TooltipProvider\n- Added useToast Hook to hooks/index.ts\n\nValidation completed:\n- Verified successful TypeScript compilation (`npx tsc --noEmit`)\n- Confirmed successful build (`yarn build`)\n- Ensured type safety for all components\n</info added on 2025-06-24T12:23:29.560Z>",
+            "status": "done",
+            "testStrategy": "Test different states of each component and verify that the appropriate colors are applied based on the component state or variant."
+          },
+          {
+            "id": 5,
+            "title": "Implement accessibility features and documentation",
+            "description": "Enhance all components with proper accessibility features and create documentation.",
+            "dependencies": [],
+            "details": "1. Add ARIA attributes to all components\n2. Implement keyboard navigation support\n3. Test with screen readers and fix any accessibility issues\n4. Create a simple documentation page showcasing all components\n5. Add usage examples for each component with code snippets\n<info added on 2025-06-24T13:30:52.397Z>\n6. Implement accessibility features:\n   - Create accessibility utility system (src/utils/accessibility.ts)\n   - Enhance CSS for accessibility (src/styles/globals.css)\n   - Develop AccessibilityAuditor component (src/components/accessibility/AccessibilityAuditor.tsx)\n   - Improve accessibility for all UI components\n   - Add Skip Link to App.tsx\n   - Integrate AccessibilityAuditor into ComponentDemo.tsx\n\n7. Create comprehensive accessibility documentation (docs/ACCESSIBILITY.md):\n   - WCAG 2.1 AA compliance guide\n   - Component-specific accessibility guidelines\n   - Developer guide for accessibility considerations\n   - Manual and automated accessibility testing checklist\n   - Recommended accessibility testing tools\n\n8. Validate accessibility implementation:\n   - Ensure TypeScript compilation safety for all accessibility features\n   - Verify accessibility features work correctly in production build\n\n9. Technical achievements:\n   - Automated accessibility checks during development\n   - Comprehensive support for various user needs (keyboard navigation, screen readers, high contrast mode, reduced motion)\n   - Improved developer experience with utility functions and clear guidelines\n   - Sustainable system for maintaining accessibility in future component development\n</info added on 2025-06-24T13:30:52.397Z>",
+            "status": "done",
+            "testStrategy": "Use accessibility testing tools (like axe or Lighthouse) to verify ARIA attributes and keyboard navigation. Test with actual screen readers to ensure proper announcements."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Layout Components Implementation",
+        "description": "Create reusable layout components including Header, Sidebar, Footer, and PageContainer.",
+        "details": "Create the following layout components in src/components/layout/:\n\n1. **Header.tsx**:\n   - Logo on the left\n   - Navigation links in the center\n   - User menu dropdown on the right\n   - Responsive design for mobile\n\n2. **Sidebar.tsx**:\n   - Navigation links for dashboard\n   - Collapsible on mobile\n   - Active state for current route\n\n3. **Footer.tsx**:\n   - Copyright information\n   - Links to terms, privacy policy, etc.\n\n4. **PageContainer.tsx**:\n   - Wrapper component for consistent page margins\n   - Responsive padding\n\n5. **DashboardLayout.tsx**:\n   - Combines Header, Sidebar, and PageContainer\n   - Used for authenticated pages\n\n6. **MainLayout.tsx**:\n   - Combines Header, Footer, and PageContainer\n   - Used for public pages\n\nEnsure all layouts are responsive and follow the styling guidelines from the PRD.",
+        "testStrategy": "Test layouts at various screen sizes to ensure responsive behavior. Verify that navigation works correctly and that layouts maintain proper spacing and alignment across different content types.",
+        "priority": "high",
+        "dependencies": [
+          4
+        ],
+        "status": "done",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Header Component",
+            "description": "Implement the Header component with logo, navigation links, and user menu dropdown",
+            "dependencies": [],
+            "details": "Create src/components/layout/Header.tsx with the following features:\n- Position logo on the left side\n- Add navigation links in the center with proper spacing\n- Implement user menu dropdown on the right with avatar and username\n- Use flexbox for layout positioning\n- Add responsive styles using media queries to collapse into a hamburger menu on mobile\n- Implement proper hover and focus states for interactive elements\n- Use theme colors and typography from the design system\n<info added on 2025-06-24T14:03:40.379Z>\nHeader component implementation has been completed successfully.\n\nImplemented features:\n- ASK2 logo on the left (redirects to dashboard when clicked)\n- Navigation links in the center (Dashboard, Inbox, Reputation Requests, Help)\n- Notification button and user menu dropdown on the right\n- Fully responsive design (transforms into hamburger menu on mobile)\n- User avatar, name, and organization information display\n- Dropdown menu with Settings and Logout options\n- Auto-close functionality when clicking outside the menu\n- Accessibility support (aria-labels, keyboard navigation)\n- Integration with lucide-react icons\n- Full TypeScript support\n</info added on 2025-06-24T14:03:40.379Z>",
+            "status": "done",
+            "testStrategy": "Create unit tests to verify the Header renders correctly in both desktop and mobile viewports. Test that the dropdown menu opens and closes correctly."
+          },
+          {
+            "id": 2,
+            "title": "Implement Sidebar and Footer Components",
+            "description": "Create the Sidebar component with navigation links and the Footer component with copyright information",
+            "dependencies": [],
+            "details": "Create two components:\n\n1. src/components/layout/Sidebar.tsx:\n- Implement vertical navigation menu with icons and labels\n- Add active state styling for the current route\n- Make it collapsible on mobile devices\n- Add proper spacing and indentation for nested menu items\n\n2. src/components/layout/Footer.tsx:\n- Add copyright information at the bottom\n- Implement links to terms, privacy policy, and other legal pages\n- Ensure proper spacing and alignment\n- Make it responsive for all screen sizes",
+            "status": "done",
+            "testStrategy": "Test that the Sidebar correctly highlights the active route. Verify the Footer renders all required links and copyright information."
+          },
+          {
+            "id": 3,
+            "title": "Create PageContainer Component",
+            "description": "Implement the PageContainer wrapper component for consistent page margins and padding",
+            "dependencies": [],
+            "details": "Create src/components/layout/PageContainer.tsx:\n- Implement a wrapper component that provides consistent margins and padding\n- Use responsive padding that adjusts based on screen size\n- Add proper max-width constraints to ensure content doesn't stretch too wide on large screens\n- Implement props to allow customization of padding, background color, and max-width\n- Add proper TypeScript props interface with default values",
+            "status": "done",
+            "testStrategy": "Test that the PageContainer correctly applies margins and padding. Verify it responds appropriately to different viewport sizes."
+          },
+          {
+            "id": 4,
+            "title": "Implement DashboardLayout Component",
+            "description": "Create the DashboardLayout component that combines Header, Sidebar, and PageContainer",
+            "dependencies": [],
+            "details": "Create src/components/layout/DashboardLayout.tsx:\n- Import and compose Header, Sidebar, and PageContainer components\n- Structure the layout with Header at the top, Sidebar on the left, and main content area\n- Implement proper grid or flexbox layout to ensure components align correctly\n- Add state management for sidebar collapse/expand functionality\n- Ensure the layout is responsive and adapts to different screen sizes\n- Create a children prop to accept and render page content",
+            "status": "done",
+            "testStrategy": "Test that DashboardLayout correctly renders all child components. Verify the sidebar collapse/expand functionality works as expected."
+          },
+          {
+            "id": 5,
+            "title": "Implement MainLayout Component",
+            "description": "Create the MainLayout component that combines Header, Footer, and PageContainer for public pages",
+            "dependencies": [],
+            "details": "Create src/components/layout/MainLayout.tsx:\n- Import and compose Header, Footer, and PageContainer components\n- Structure the layout with Header at the top, content in the middle, and Footer at the bottom\n- Ensure the Footer stays at the bottom of the page even with minimal content\n- Implement proper spacing between the main content and the footer\n- Make the layout responsive for all screen sizes\n- Create a children prop to accept and render page content\n- Add optional props to customize the layout behavior",
+            "status": "done",
+            "testStrategy": "Test that MainLayout correctly renders all child components. Verify that the footer stays at the bottom of the page regardless of content height."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Routing Configuration",
+        "description": "Set up React Router with the route structure defined in the PRD, including protected routes for authenticated content.",
+        "details": "1. Create a router configuration in src/App.tsx:\n\n```typescript\nimport { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';\nimport { QueryClient, QueryClientProvider } from '@tanstack/react-query';\n\n// Layouts\nimport MainLayout from './components/layout/MainLayout';\nimport DashboardLayout from './components/layout/DashboardLayout';\nimport RequestLayout from './components/layout/RequestLayout';\n\n// Pages (import all page components)\n\n// Auth guard component\nconst ProtectedRoute = ({ children }) => {\n  const isAuthenticated = true; // Replace with actual auth check\n  return isAuthenticated ? children : <Navigate to=\"/login\" />;\n};\n\nconst queryClient = new QueryClient();\n\nfunction App() {\n  return (\n    <QueryClientProvider client={queryClient}>\n      <BrowserRouter>\n        <Routes>\n          <Route path=\"/\" element={<MainLayout />}>\n            <Route index element={<LandingPage />} />\n            <Route path=\"login\" element={<LoginPage />} />\n            <Route path=\"signup/corporate\" element={<CorporateSignupPage />} />\n          </Route>\n          \n          <Route path=\"/dashboard\" element={\n            <ProtectedRoute>\n              <DashboardLayout />\n            </ProtectedRoute>\n          }>\n            <Route index element={<DashboardPage />} />\n            <Route path=\"inbox\" element={<InboxPage />} />\n            <Route path=\"settings\" element={<SettingsPage />} />\n          </Route>\n          \n          <Route path=\"/request\" element={\n            <ProtectedRoute>\n              <RequestLayout />\n            </ProtectedRoute>\n          }>\n            <Route path=\"new\" element={<NewRequestWizard />} />\n            <Route path=\":id/result\" element={<ResultPage />} />\n            <Route path=\":id/result/detail\" element={<ResultDetailPage />} />\n          </Route>\n          \n          <Route path=\"/consent/:token\" element={<ConsentPage />} />\n          <Route path=\"/respond/:token\" element={<RespondPage />} />\n        </Routes>\n      </BrowserRouter>\n    </QueryClientProvider>\n  );\n}\n\nexport default App;\n```\n\n2. Create placeholder components for all pages to test routing\n3. Implement the ProtectedRoute component with proper authentication check",
+        "testStrategy": "Test navigation between routes to ensure correct components are rendered. Verify that protected routes redirect to login when not authenticated. Test URL parameters are correctly passed to components.",
+        "priority": "high",
+        "dependencies": [
+          1,
+          5
+        ],
+        "status": "done",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Authentication Context and Hook",
+            "description": "Implement an authentication context and custom hook to manage user authentication state across the application.",
+            "dependencies": [],
+            "details": "Create src/contexts/AuthContext.tsx with a React context that provides authentication state and methods. Implement useAuth hook that exposes isAuthenticated, login, logout, and getCurrentUser functions. Use localStorage or cookies to persist authentication tokens. This will be used by the ProtectedRoute component.\n<info added on 2025-06-24T14:19:07.148Z>\nAuthentication Context와 useAuth Hook 구현을 성공적으로 완료했습니다.\n\n## 구현된 기능들:\n- AuthContext.tsx 생성 및 완전한 인증 시스템 구현\n- User, AuthToken, LoginCredentials 타입 정의\n- 포괄적인 AuthContextType 인터페이스\n- localStorage/sessionStorage를 활용한 토큰 영속성\n- 자동 토큰 갱신 기능\n- 역할 기반 권한 시스템 (admin, member, viewer)\n- Mock API 구현 (실제 API 대체 가능한 구조)\n- 완전한 TypeScript 지원\n- 에러 처리 및 로딩 상태 관리\n- useAuth 커스텀 훅으로 편리한 사용성 제공\n\n## 주요 기능:\n- login(): 자격 증명을 통한 로그인\n- logout(): 로그아웃 및 저장소 정리\n- getCurrentUser(): 현재 사용자 정보 반환\n- updateUser(): 사용자 정보 업데이트\n- refreshAuthToken(): 토큰 자동 갱신\n- hasRole(): 역할 기반 권한 확인\n- isTokenExpired(): 토큰 만료 확인\n\n## 구현된 보안 기능:\n- 토큰 만료 자동 감지\n- Remember Me 기능 (localStorage vs sessionStorage)\n- 자동 토큰 갱신 (만료 5분 전)\n- 안전한 저장소 관리\n</info added on 2025-06-24T14:19:07.148Z>",
+            "status": "done",
+            "testStrategy": "Write unit tests for the useAuth hook to verify authentication state management and token persistence."
+          },
+          {
+            "id": 2,
+            "title": "Implement ProtectedRoute Component",
+            "description": "Create a reusable ProtectedRoute component that redirects unauthenticated users to the login page.",
+            "dependencies": [
+              1
+            ],
+            "details": "Create src/components/routing/ProtectedRoute.tsx that uses the useAuth hook to check authentication status. If authenticated, render children; otherwise, redirect to /login using Navigate from react-router-dom. Add proper TypeScript typing for component props.",
+            "status": "done",
+            "testStrategy": "Test the component with both authenticated and unauthenticated states to verify correct rendering and redirection behavior."
+          },
+          {
+            "id": 3,
+            "title": "Create Layout Components",
+            "description": "Implement the three layout components needed for different sections of the application.",
+            "dependencies": [],
+            "details": "Create MainLayout.tsx, DashboardLayout.tsx, and RequestLayout.tsx in src/components/layout/. Each layout should include common UI elements (header, footer, navigation) and use Outlet from react-router-dom to render nested routes. MainLayout for public pages, DashboardLayout for authenticated dashboard views, and RequestLayout for request-related flows.",
+            "status": "done",
+            "testStrategy": "Verify layouts render correctly with different child components and responsive design works as expected."
+          },
+          {
+            "id": 4,
+            "title": "Create Page Component Placeholders",
+            "description": "Create placeholder components for all pages defined in the routing structure.",
+            "dependencies": [],
+            "details": "Create basic components for all pages: LandingPage, LoginPage, CorporateSignupPage, DashboardPage, InboxPage, SettingsPage, NewRequestWizard, ResultPage, ResultDetailPage, ConsentPage, and RespondPage. Each placeholder should display its name and basic structure to verify routing works correctly.",
+            "status": "done",
+            "testStrategy": "Manually navigate to each route to verify the correct placeholder is displayed."
+          },
+          {
+            "id": 5,
+            "title": "Configure Router in App.tsx",
+            "description": "Integrate all components into the main App.tsx file with proper route configuration.",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "details": "Update src/App.tsx with the complete routing structure. Import all layout and page components. Wrap protected routes with the ProtectedRoute component. Configure QueryClientProvider for React Query. Ensure all routes match the PRD specifications. Add a catch-all route for 404 handling.",
+            "status": "done",
+            "testStrategy": "Test navigation through the entire application, verify protected routes work correctly, and check that layouts are applied properly to their respective routes."
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Authentication Pages Implementation",
+        "description": "Implement the login and corporate signup pages with form validation and mock authentication flow.",
+        "details": "1. **LoginPage.tsx**:\n   - Create a form with email and password inputs\n   - Add validation for email format and required fields\n   - Implement \"Magic Link\" login option\n   - Add link to signup page\n   - Create mock login function that simulates API call\n   - Handle loading and error states\n\n2. **CorporateSignupPage.tsx**:\n   - Implement multi-step form with the following steps:\n     - Step 1: Company information (name, domain)\n     - Step 2: User information (name, email, password)\n     - Step 3: Terms and conditions acceptance\n   - Add form validation for each step\n   - Implement progress indicator\n   - Create mock signup function\n   - Handle success, loading, and error states\n\n3. Create a simple auth context to manage authentication state:\n```typescript\n// src/contexts/AuthContext.tsx\nimport { createContext, useContext, useState } from 'react';\nimport { User } from '../types';\nimport { mockUsers } from '../mocks/data';\n\ninterface AuthContextType {\n  user: User | null;\n  login: (email: string, password: string) => Promise<void>;\n  logout: () => void;\n  isLoading: boolean;\n  error: string | null;\n}\n\nconst AuthContext = createContext<AuthContextType | undefined>(undefined);\n\nexport const AuthProvider = ({ children }) => {\n  const [user, setUser] = useState<User | null>(null);\n  const [isLoading, setIsLoading] = useState(false);\n  const [error, setError] = useState<string | null>(null);\n\n  const login = async (email: string, password: string) => {\n    setIsLoading(true);\n    setError(null);\n    \n    try {\n      // Simulate API call\n      await new Promise(resolve => setTimeout(resolve, 1000));\n      \n      const foundUser = mockUsers.find(u => u.email === email);\n      if (foundUser) {\n        setUser(foundUser);\n      } else {\n        throw new Error('Invalid credentials');\n      }\n    } catch (err) {\n      setError(err.message);\n    } finally {\n      setIsLoading(false);\n    }\n  };\n\n  const logout = () => {\n    setUser(null);\n  };\n\n  return (\n    <AuthContext.Provider value={{ user, login, logout, isLoading, error }}>\n      {children}\n    </AuthContext.Provider>\n  );\n};\n\nexport const useAuth = () => {\n  const context = useContext(AuthContext);\n  if (context === undefined) {\n    throw new Error('useAuth must be used within an AuthProvider');\n  }\n  return context;\n};\n```",
+        "testStrategy": "Test form validation by submitting with invalid data. Test the multi-step form navigation. Verify that authentication state is correctly managed and persisted. Test error handling by simulating API failures.",
+        "priority": "high",
+        "dependencies": [
+          4,
+          6
+        ],
+        "status": "done",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Authentication Context",
+            "description": "Create the authentication context to manage user state, login, and logout functionality across the application.",
+            "dependencies": [],
+            "details": "Create AuthContext.tsx in the contexts directory with the following functionality:\n- Define AuthContextType interface with user, login, logout, isLoading, and error properties\n- Implement AuthProvider component with useState hooks for user, loading, and error states\n- Create login function that simulates API call with timeout and user lookup in mockUsers\n- Implement logout function to clear user state\n- Create and export useAuth hook for consuming the context\n- Wrap the application with AuthProvider in the component hierarchy",
+            "status": "done",
+            "testStrategy": "Test the context with React Testing Library by creating a test wrapper component and verifying state changes after login/logout actions."
+          },
+          {
+            "id": 2,
+            "title": "Create Login Page UI Components",
+            "description": "Build the UI components for the login page including form inputs, validation, and layout.",
+            "dependencies": [],
+            "details": "Create LoginPage.tsx with the following elements:\n- Form with styled email and password input fields\n- Email validation using regex pattern\n- Required field validation for both inputs\n- Submit button with loading state\n- Error message display area\n- \"Forgot Password\" link\n- Link to signup page\n- Responsive layout that works on mobile and desktop\n- Use CSS modules or styled-components for styling",
+            "status": "done",
+            "testStrategy": "Create snapshot tests for the login form and unit tests for form validation logic."
+          },
+          {
+            "id": 3,
+            "title": "Implement Login Page Functionality",
+            "description": "Connect the login page UI to the authentication context and implement form submission logic.",
+            "dependencies": [],
+            "details": "Enhance LoginPage.tsx with the following functionality:\n- Import and use the useAuth hook to access login function and state\n- Implement form state management using React hooks (useState)\n- Create form submission handler that validates inputs before calling login\n- Add \"Magic Link\" login option with email-only submission\n- Implement loading state during authentication\n- Display error messages from failed login attempts\n- Add redirect logic for authenticated users\n- Implement remember me functionality using localStorage",
+            "status": "done",
+            "testStrategy": "Test form submission with valid and invalid credentials, verify error handling, and test redirects for authenticated users."
+          },
+          {
+            "id": 4,
+            "title": "Create Corporate Signup Multi-step Form UI",
+            "description": "Build the UI components for the multi-step corporate signup process with progress indicator.",
+            "dependencies": [],
+            "details": "Create CorporateSignupPage.tsx with the following elements:\n- Multi-step form container with progress indicator\n- Step 1: Company information form (company name, domain fields)\n- Step 2: User information form (name, email, password fields)\n- Step 3: Terms and conditions acceptance with checkbox\n- Navigation buttons (Previous, Next, Submit)\n- Form state persistence between steps\n- Responsive design for all form steps\n- Visual feedback for current step",
+            "status": "done",
+            "testStrategy": "Create snapshot tests for each step of the form and test navigation between steps."
+          },
+          {
+            "id": 5,
+            "title": "Implement Corporate Signup Functionality",
+            "description": "Add validation, state management, and submission logic to the corporate signup flow.",
+            "dependencies": [],
+            "details": "Enhance CorporateSignupPage.tsx with the following functionality:\n- Implement form validation for each step:\n  - Company name and domain validation in step 1\n  - Email format, password strength validation in step 2\n  - Required checkbox for terms acceptance in step 3\n- Create step navigation logic with validation checks\n- Implement form submission with mock API call\n- Add loading, success, and error states for submission\n- Store partial form data between steps\n- Create success page/message after completion\n- Implement company domain availability check",
+            "status": "done",
+            "testStrategy": "Test form validation for each step, test the complete submission flow, and verify error handling for invalid inputs."
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Landing Page Implementation",
+        "description": "Create the landing page with hero section, feature highlights, and call-to-action buttons.",
+        "details": "Create LandingPage.tsx with the following sections:\n\n1. **Hero Section**:\n   - Compelling headline about ASK2's value proposition\n   - Brief description of the service\n   - Primary CTA button linking to signup\n   - Secondary CTA button linking to login\n   - Hero image or illustration\n\n2. **Features Section**:\n   - 3-4 feature cards highlighting key benefits\n   - Each card with icon, title, and description\n   - Use the Card component from UI library\n\n3. **How It Works Section**:\n   - Step-by-step explanation of the reference check process\n   - Use the Stepper component\n   - Include illustrations for each step\n\n4. **Testimonials Section** (optional):\n   - Quote cards from fictional satisfied customers\n\n5. **Final CTA Section**:\n   - Reinforcing call-to-action\n   - Sign-up button\n\nEnsure the page is fully responsive and follows the styling guidelines from the PRD.",
+        "testStrategy": "Test responsive behavior at various screen sizes. Verify that all links and CTAs work correctly. Check that images load properly and that the page performance is optimized.",
+        "priority": "medium",
+        "dependencies": [
+          5,
+          6
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create basic landing page structure and hero section",
+            "description": "Set up the LandingPage.tsx component with responsive layout and implement the hero section with headline, description, and CTA buttons.",
+            "dependencies": [],
+            "details": "1. Create LandingPage.tsx component with basic structure\n2. Implement responsive container layout using Flexbox or Grid\n3. Create the hero section with headline, description text\n4. Add primary CTA button linking to signup route\n5. Add secondary CTA button linking to login route\n6. Add placeholder for hero image (actual asset to be added later)\n7. Style according to design guidelines with mobile-first approach",
+            "status": "pending",
+            "testStrategy": "Test component rendering and responsive behavior across different viewport sizes. Verify that CTA buttons have correct routing."
+          },
+          {
+            "id": 2,
+            "title": "Implement features section with feature cards",
+            "description": "Create the features section with 3-4 feature cards highlighting key benefits of the service.",
+            "dependencies": [],
+            "details": "1. Create a Features section component\n2. Import and use the Card component from UI library\n3. Create 3-4 feature cards with icon, title, and description\n4. Arrange cards in responsive grid layout\n5. Implement hover effects and animations as specified in design\n6. Ensure consistent spacing and alignment between cards",
+            "status": "pending",
+            "testStrategy": "Verify that feature cards render correctly with proper spacing and alignment. Test responsive behavior to ensure cards stack appropriately on smaller screens."
+          },
+          {
+            "id": 3,
+            "title": "Build 'How It Works' section with stepper component",
+            "description": "Implement the step-by-step explanation section using the Stepper component to show the reference check process.",
+            "dependencies": [],
+            "details": "1. Create HowItWorks section component\n2. Import and configure the Stepper component from UI library\n3. Define 3-5 steps in the reference check process\n4. Add descriptive text for each step\n5. Include placeholder for illustrations at each step\n6. Ensure the stepper is responsive and adapts to mobile view\n7. Add appropriate animations for step transitions",
+            "status": "pending",
+            "testStrategy": "Test stepper component functionality and verify that all steps display correctly. Check that responsive behavior works as expected on different devices."
+          },
+          {
+            "id": 4,
+            "title": "Create testimonials section with quote cards",
+            "description": "Implement the optional testimonials section with quote cards from fictional satisfied customers.",
+            "dependencies": [],
+            "details": "1. Create Testimonials section component\n2. Design quote cards with customer name, role, company, and testimonial text\n3. Add fictional customer testimonials (3-5 quotes)\n4. Implement a carousel/slider for testimonials on mobile\n5. Add appropriate styling for quote formatting and emphasis\n6. Include optional customer avatars or company logos\n7. Ensure proper spacing and typography for readability",
+            "status": "pending",
+            "testStrategy": "Test carousel/slider functionality if implemented. Verify that testimonials display correctly across different screen sizes with proper text wrapping and spacing."
+          },
+          {
+            "id": 5,
+            "title": "Implement final CTA section and integrate all sections",
+            "description": "Create the final call-to-action section and integrate all sections into a cohesive landing page with proper navigation and styling.",
+            "dependencies": [],
+            "details": "1. Create FinalCTA section component with compelling headline\n2. Add sign-up button with prominent styling\n3. Integrate all previously created sections into main LandingPage component\n4. Implement smooth scrolling between sections\n5. Add navigation links to header for each section\n6. Ensure consistent styling, spacing, and typography across all sections\n7. Perform final responsive testing and adjustments\n8. Optimize performance by lazy-loading images and components",
+            "status": "pending",
+            "testStrategy": "Conduct end-to-end testing of the complete landing page. Verify all sections render correctly and navigation works as expected. Test performance metrics like load time and Core Web Vitals."
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Dashboard Page Implementation",
+        "description": "Create the main dashboard page with statistics cards and recent requests tables.",
+        "details": "Create DashboardPage.tsx with the following components:\n\n1. **Statistics Section**:\n   - Create 4 stat cards in a grid layout:\n     - Ongoing Requests\n     - Completed Requests\n     - Received Requests\n     - Response Rate\n   - Each card should display a number, label, and trend indicator\n\n2. **Recent Requests Table**:\n   - Table showing the last 5 reference requests created by the user\n   - Columns: Talent Name, Position, Status, Created Date, Actions\n   - Use the Table component from UI library\n   - Add a \"View All\" link to the full requests page\n\n3. **Recent Received Requests Table**:\n   - Table showing the last 5 reference requests received by the user\n   - Columns: Talent Name, Requesting Company, Status, Received Date, Actions\n   - Add a \"View All\" link to the inbox page\n\n4. **Quick Actions Section**:\n   - \"Create New Request\" button\n   - \"View Inbox\" button\n\nUse the mock data from src/mocks/data.ts to populate the dashboard components.",
+        "testStrategy": "Verify that statistics are calculated correctly from mock data. Test table sorting and filtering if implemented. Check that all links and actions work as expected. Test responsive layout at different screen sizes.",
+        "priority": "high",
+        "dependencies": [
+          3,
+          5,
+          6
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Dashboard Layout and Statistics Section",
+            "description": "Set up the basic dashboard layout and implement the statistics section with 4 stat cards in a grid layout.",
+            "dependencies": [],
+            "details": "1. Create DashboardPage.tsx with a responsive layout structure\n2. Implement a grid layout for the statistics section\n3. Create a StatCard component that accepts props for number, label, and trend indicator\n4. Fetch mock data from src/mocks/data.ts for statistics\n5. Implement the 4 stat cards: Ongoing Requests, Completed Requests, Received Requests, and Response Rate\n6. Style the cards with appropriate colors and icons",
+            "status": "pending",
+            "testStrategy": "Test the StatCard component in isolation with various props. Verify the dashboard layout is responsive across different screen sizes."
+          },
+          {
+            "id": 2,
+            "title": "Implement Recent Requests Table",
+            "description": "Create a table showing the last 5 reference requests created by the user with appropriate columns and a 'View All' link.",
+            "dependencies": [],
+            "details": "1. Use the Table component from the UI library\n2. Configure the table with columns: Talent Name, Position, Status, Created Date, Actions\n3. Fetch and filter the most recent 5 requests from mock data\n4. Implement status indicators with appropriate colors\n5. Add action buttons/icons for each row\n6. Add a 'View All' link that navigates to the full requests page\n7. Style the table section with a header and appropriate spacing",
+            "status": "pending",
+            "testStrategy": "Test data filtering logic to ensure only the 5 most recent requests are shown. Verify all columns display correctly and the 'View All' link navigates to the correct route."
+          },
+          {
+            "id": 3,
+            "title": "Implement Recent Received Requests Table",
+            "description": "Create a table showing the last 5 reference requests received by the user with appropriate columns and a 'View All' link.",
+            "dependencies": [],
+            "details": "1. Use the Table component from the UI library\n2. Configure the table with columns: Talent Name, Requesting Company, Status, Received Date, Actions\n3. Fetch and filter the most recent 5 received requests from mock data\n4. Implement status indicators with appropriate colors\n5. Add action buttons/icons for each row\n6. Add a 'View All' link that navigates to the inbox page\n7. Style the table section with a header and appropriate spacing",
+            "status": "pending",
+            "testStrategy": "Test data filtering logic to ensure only the 5 most recent received requests are shown. Verify all columns display correctly and the 'View All' link navigates to the correct route."
+          },
+          {
+            "id": 4,
+            "title": "Implement Quick Actions Section",
+            "description": "Create a section with quick action buttons for creating new requests and viewing the inbox.",
+            "dependencies": [],
+            "details": "1. Design a visually distinct section for quick actions\n2. Implement a 'Create New Request' button with appropriate styling and icon\n3. Implement a 'View Inbox' button with appropriate styling and icon\n4. Add click handlers to navigate to the respective pages\n5. Ensure buttons are responsive and have hover/active states\n6. Position the quick actions section appropriately on the dashboard",
+            "status": "pending",
+            "testStrategy": "Test button click handlers to ensure they navigate to the correct routes. Verify buttons display correctly across different screen sizes."
+          },
+          {
+            "id": 5,
+            "title": "Integrate Components and Add Responsive Behavior",
+            "description": "Integrate all dashboard components, implement responsive behavior, and add loading states.",
+            "dependencies": [],
+            "details": "1. Assemble all components into the DashboardPage layout\n2. Implement responsive behavior for different screen sizes (desktop, tablet, mobile)\n3. Add loading states for data fetching\n4. Implement error handling for data fetching failures\n5. Add animations for component transitions and loading states\n6. Optimize component rendering with React.memo where appropriate\n7. Add final styling touches and ensure consistent spacing between sections",
+            "status": "pending",
+            "testStrategy": "Test the complete dashboard with various screen sizes. Verify all components render correctly together. Test loading states and error handling by mocking API responses."
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Inbox Page Implementation",
+        "description": "Create the inbox page showing received reference requests with filtering and status categorization.",
+        "details": "Create InboxPage.tsx with the following features:\n\n1. **Filtering Controls**:\n   - Search input for filtering by talent name or company\n   - Status filter dropdown (All, Pending, Responded, Rejected)\n   - Date range picker for filtering by received date\n\n2. **Requests Table**:\n   - Table showing all reference requests received by the user\n   - Columns: Talent Name, Position, Requesting Company, Status, Received Date, Actions\n   - Pagination controls\n   - Status indicator with appropriate colors (pending: yellow, responded: green, rejected: red)\n\n3. **Response Statistics**:\n   - Card showing response rate\n   - Average response time\n   - Total requests received\n\n4. **Empty State**:\n   - Display a message when no requests match the filters\n\nImplement client-side filtering and pagination using the mock data from src/mocks/data.ts.",
+        "testStrategy": "Test filtering functionality with various combinations of filters. Verify that pagination works correctly. Test empty state rendering when no results match filters. Check responsive behavior at different screen sizes.",
+        "priority": "medium",
+        "dependencies": [
+          3,
+          5,
+          6
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create basic InboxPage layout and structure",
+            "description": "Set up the foundational structure of the InboxPage component with routing and basic layout elements.",
+            "dependencies": [],
+            "details": "Create InboxPage.tsx with a basic layout structure including header, main content area, and placeholder sections for filtering controls, requests table, statistics, and empty state. Set up the component with React hooks for state management (useState, useEffect) and implement the page routing in the application. Import necessary UI components from the design system and set up the basic styling using the project's styling approach.",
+            "status": "pending",
+            "testStrategy": "Create snapshot tests to verify the basic structure renders correctly. Test that the component mounts without errors."
+          },
+          {
+            "id": 2,
+            "title": "Implement filtering controls and state management",
+            "description": "Create the filtering UI controls and implement the state management for filters.",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement the search input, status filter dropdown, and date range picker components. Set up state variables to track filter values (searchQuery, statusFilter, dateRange). Create handler functions for each filter control to update the corresponding state. Ensure the UI updates reactively when filter values change. Connect the filter controls to the page layout created in the previous subtask.",
+            "status": "pending",
+            "testStrategy": "Test each filter control to ensure it updates state correctly. Verify that multiple filters can be applied simultaneously."
+          },
+          {
+            "id": 3,
+            "title": "Implement requests table with mock data integration",
+            "description": "Create the table component to display reference requests with all required columns and integrate with mock data.",
+            "dependencies": [
+              1
+            ],
+            "details": "Import and process mock data from src/mocks/data.ts. Create a table component with columns for Talent Name, Position, Requesting Company, Status, Received Date, and Actions. Implement status indicators with appropriate colors (yellow for pending, green for responded, red for rejected). Add pagination controls and implement client-side pagination logic. Style the table according to the design requirements.",
+            "status": "pending",
+            "testStrategy": "Test that the table renders the correct number of rows based on pagination settings. Verify that status indicators display the correct colors for each status type."
+          },
+          {
+            "id": 4,
+            "title": "Connect filtering logic to table display",
+            "description": "Implement the filtering logic to filter the table data based on user-selected filters.",
+            "dependencies": [
+              2,
+              3
+            ],
+            "details": "Create a filtering function that processes the mock data based on the current filter state (search query, status filter, date range). Apply this function to the data before displaying it in the table. Ensure the table updates reactively when filters change. Implement the empty state display logic that shows when no results match the current filters. Optimize the filtering logic for performance with useMemo or similar React patterns.",
+            "status": "pending",
+            "testStrategy": "Test filtering with various combinations of filters to ensure correct results are displayed. Verify the empty state appears when no results match the filters."
+          },
+          {
+            "id": 5,
+            "title": "Implement response statistics cards",
+            "description": "Create the statistics cards showing response rate, average response time, and total requests received.",
+            "dependencies": [
+              3
+            ],
+            "details": "Calculate statistics from the mock data: response rate (percentage of responded requests), average response time (in days), and total requests count. Create visually appealing statistic cards to display these metrics. Ensure the statistics update when the underlying data changes. Add appropriate icons or visual elements to enhance the presentation of the statistics. Position the statistics cards according to the page layout.",
+            "status": "pending",
+            "testStrategy": "Test that statistics are calculated correctly from the mock data. Verify that statistics update appropriately when the data changes."
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "title": "Settings Page Implementation",
+        "description": "Create the user settings page with profile information, notification preferences, and security settings.",
+        "details": "Create SettingsPage.tsx with the following sections:\n\n1. **Profile Information**:\n   - Form for editing user details (name, email, job title)\n   - Company information display (for corporate users)\n   - Profile picture upload (mock functionality)\n   - Save button with loading state\n\n2. **Notification Settings**:\n   - Email notification toggles for different event types:\n     - New reference requests\n     - Request status updates\n     - Talent consent updates\n     - System announcements\n   - Save button with loading state\n\n3. **Security Settings**:\n   - Password change form\n   - Two-factor authentication toggle (mock functionality)\n   - Session management (list of active sessions with logout option)\n   - Save button with loading state\n\nImplement form validation and mock save functionality that simulates API calls with loading states.",
+        "testStrategy": "Test form validation for all input fields. Verify that toggle switches and form submissions work correctly. Test error handling by simulating API failures. Check that forms maintain state during tab switching.",
+        "priority": "low",
+        "dependencies": [
+          4,
+          6,
+          7
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create SettingsPage component structure and layout",
+            "description": "Set up the basic structure of the SettingsPage component with tab navigation for the three main sections: Profile Information, Notification Settings, and Security Settings.",
+            "dependencies": [],
+            "details": "Create SettingsPage.tsx with a responsive layout using a tab-based navigation system. Implement the main container component with proper routing between tabs. Set up the basic styling and layout for the page using the project's design system. Include header, navigation tabs, and content area that will house each settings section.",
+            "status": "pending",
+            "testStrategy": "Test tab navigation functionality and responsive layout across different screen sizes."
+          },
+          {
+            "id": 2,
+            "title": "Implement Profile Information section",
+            "description": "Create the Profile Information section with form fields for user details, company information display, and profile picture upload functionality.",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement form fields for name, email, and job title with appropriate validation. Display company information for corporate users (conditionally rendered). Create a profile picture upload component with preview functionality (mock the actual upload). Add a Save button with loading state that simulates an API call. Implement form validation using a form library like Formik or React Hook Form.",
+            "status": "pending",
+            "testStrategy": "Test form validation, conditional rendering of company information, and the loading state of the Save button."
+          },
+          {
+            "id": 3,
+            "title": "Implement Notification Settings section",
+            "description": "Create the Notification Settings section with toggles for different email notification types and save functionality.",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement toggle switches for each notification type (new reference requests, request status updates, talent consent updates, system announcements). Create a state management solution to track toggle states. Add a Save button with loading state that simulates an API call to update notification preferences. Include appropriate feedback messages for success/failure states.",
+            "status": "pending",
+            "testStrategy": "Test toggle state changes and verify the loading state during the mock save operation."
+          },
+          {
+            "id": 4,
+            "title": "Implement Security Settings section",
+            "description": "Create the Security Settings section with password change form, two-factor authentication toggle, and session management.",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement a password change form with current password, new password, and confirm password fields with validation. Create a toggle for two-factor authentication with mock functionality. Develop a session management component that displays active sessions with logout options. Add a Save button with loading state for each security setting. Implement appropriate validation for the password form.",
+            "status": "pending",
+            "testStrategy": "Test password validation rules, mock 2FA toggle functionality, and session management display and interactions."
+          },
+          {
+            "id": 5,
+            "title": "Implement form validation and API integration",
+            "description": "Add comprehensive form validation across all settings sections and integrate with mock API services.",
+            "dependencies": [
+              2,
+              3,
+              4
+            ],
+            "details": "Create validation schemas for all form fields across the settings page. Implement error messaging and visual feedback for validation errors. Create mock API service functions for each settings section that simulate network requests with configurable delays. Connect the Save buttons to these mock API services and implement proper loading states, success notifications, and error handling. Ensure all forms maintain state appropriately during tab navigation.",
+            "status": "pending",
+            "testStrategy": "Test comprehensive form validation scenarios, API integration with success and error states, and verify that form state is preserved when navigating between tabs."
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "title": "New Request Wizard Implementation",
+        "description": "Create the multi-step wizard for creating a new reference request with all five steps as specified in the PRD.",
+        "details": "Create a NewRequestWizard.tsx component with the following steps:\n\n1. **Step 1: Talent Information**:\n   - Form for talent details (name, email, phone)\n   - Form validation for required fields and email format\n\n2. **Step 2: Work History**:\n   - Form for entering work history details\n   - Fields for position, company, start/end dates, responsibilities\n   - Option to add multiple work history entries\n\n3. **Step 3: Target Companies**:\n   - Company search/selection interface\n   - Option to add multiple companies\n   - Fields for contact person at each company\n\n4. **Step 4: Questions Configuration**:\n   - List of default questions with toggle to include/exclude\n   - Option to add custom questions\n   - Drag and drop reordering (if time permits)\n\n5. **Step 5: Confirmation**:\n   - Summary of all entered information\n   - Terms and conditions checkbox\n   - Submit button with loading state\n\nImplement the following features:\n- Progress indicator showing current step\n- Navigation between steps (next/previous buttons)\n- Form state persistence between steps\n- Form validation before proceeding to next step\n- Mock submission function that simulates API call",
+        "testStrategy": "Test navigation between wizard steps. Verify that form validation works correctly at each step. Test that form state is preserved when navigating between steps. Verify that the summary page displays all entered information correctly. Test the submission process including loading and success states.",
+        "priority": "high",
+        "dependencies": [
+          4,
+          6,
+          7
+        ],
+        "status": "done",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Wizard Framework and Navigation",
+            "description": "Implement the base wizard component with navigation controls and progress indicator",
+            "dependencies": [],
+            "details": "Create NewRequestWizard.tsx with a container layout, step navigation buttons (previous/next), progress indicator showing current step out of 5, and state management for tracking current step. Implement the wizard's main structure with React Router or a state-based approach to handle step transitions. Set up form state persistence using React Context or Redux to maintain data between steps.",
+            "status": "done",
+            "testStrategy": "Test navigation between steps, verify progress indicator updates correctly, and ensure form state persists when moving between steps."
+          },
+          {
+            "id": 2,
+            "title": "Implement Talent Information and Work History Steps",
+            "description": "Create the first two wizard steps for collecting talent details and work history",
+            "dependencies": [
+              1
+            ],
+            "details": "For Step 1, create form components for talent details with fields for name, email, and phone. Implement form validation for required fields and email format using a form library like Formik or React Hook Form. For Step 2, build work history form with fields for position, company, start/end dates, and responsibilities. Add functionality to add/remove multiple work history entries. Ensure both steps validate data before allowing progression to next step.",
+            "status": "done",
+            "testStrategy": "Test form validation rules, verify multiple work history entries can be added/removed, and check that invalid forms prevent progression to next step."
+          },
+          {
+            "id": 3,
+            "title": "Implement Target Companies and Questions Configuration Steps",
+            "description": "Create the third and fourth wizard steps for selecting target companies and configuring questions",
+            "dependencies": [
+              2
+            ],
+            "details": "For Step 3, implement company search/selection interface with ability to add multiple companies and specify contact person for each. Create a company search component with mock data or API integration. For Step 4, build a question configuration interface with default questions that can be toggled on/off. Add functionality to create custom questions and implement drag-and-drop reordering using a library like react-beautiful-dnd.\n<info added on 2025-06-24T14:57:09.204Z>\nImplementation of Task 12.3 completed with the following features:\n\n1. **TargetCompaniesStep component (src/components/wizard/TargetCompaniesStep.tsx)**:\n   - Company name, domain, contact person, and contact email input forms\n   - Complete form validation (required fields, email format, domain format)\n   - Duplicate checking (company name, domain)\n   - Display and deletion of selected companies\n   - Responsive design (mobile/desktop)\n   - Development state validation tools\n\n2. **QuestionsStep component (src/components/wizard/QuestionsStep.tsx)**:\n   - Toggle functionality for default questions\n   - Add/delete custom questions\n   - Question reordering (move up/down)\n   - Visual indication of question activation status\n   - Summary information for selected questions\n   - 200 character limit validation\n   - Development state validation tools\n\n3. **Integration work**:\n   - Implemented components in NewRequestWizard\n   - Removed placeholder components\n   - Added exports to src/components/wizard/index.ts\n   - Passed TypeScript compilation validation\n\nAll functionality has been fully implemented, allowing users to complete Steps 3 and 4 for company selection and question configuration.\n</info added on 2025-06-24T14:57:09.204Z>",
+            "status": "done",
+            "testStrategy": "Test company search functionality, verify multiple companies can be added, test question toggling, and verify custom questions can be added and reordered."
+          },
+          {
+            "id": 4,
+            "title": "Implement Confirmation Step and Form Submission",
+            "description": "Create the final confirmation step and implement form submission functionality",
+            "dependencies": [
+              3
+            ],
+            "details": "Build Step 5 with a summary view displaying all collected information from previous steps in a readable format. Add a terms and conditions checkbox that must be checked before submission. Implement a submit button with loading state and create a mock submission function that simulates an API call with a delay. Add success and error handling for the submission process.\n<info added on 2025-06-24T15:02:41.568Z>\nTask 12.4 implementation completed with the following features:\n\n1. **ConfirmationStep Component (src/components/wizard/ConfirmationStep.tsx)**:\n   - Complete summary of all input information (talent info, work history, target companies, selected questions)\n   - Automatic calculation of employment duration (years/months)\n   - Questions sorted in order with custom questions clearly distinguished\n\n2. **Terms and Conditions Agreement**:\n   - Personal information collection and usage consent checkbox\n   - Submission restricted without agreement\n   - Clear guidance messages\n\n3. **Form Submission Functionality**:\n   - Mock API call simulation (2-second delay, 90% success rate)\n   - Loading state display during submission (with Spinner)\n   - Request number generation (in `REQ-${timestamp}` format)\n\n4. **Success/Error Handling**:\n   - On successful submission: Request number display, next steps guidance, dashboard navigation button\n   - On submission failure: Error message display, retry and dashboard navigation options\n   - Network error handling\n\n5. **UI/UX Improvements**:\n   - Modified navigation logic for the final step with self-contained submission handling\n   - Only \"Back\" button displayed for previous step navigation\n   - Development state validation tools\n   - Fully responsive design\n\n6. **Integration Work**:\n   - Added exports in src/components/wizard/index.ts\n   - Implemented actual component usage in NewRequestWizard\n   - Removed placeholder components\n   - Passed TypeScript compilation validation\n\nThe complete wizard flow now allows users to experience the full reputation request process from step 1 through step 5.\n</info added on 2025-06-24T15:02:41.568Z>",
+            "status": "done",
+            "testStrategy": "Test that all form data is correctly displayed in the summary, verify terms checkbox is required, and test the submission process including loading states and error handling."
+          },
+          {
+            "id": 5,
+            "title": "Implement Form Validation and Error Handling",
+            "description": "Add comprehensive validation across all wizard steps and implement error handling",
+            "dependencies": [
+              4
+            ],
+            "details": "Implement cross-step validation to ensure all required data is present and valid. Create reusable validation functions for common patterns (email, phone, dates). Add inline error messages for form fields and summary error messages at the step level. Implement error boundary components to catch and display runtime errors. Add form state persistence to local storage to prevent data loss on page refresh.\n<info added on 2025-06-24T15:20:45.793Z>\n# Implementation Complete - Form Validation and Error Handling\n\n## Implemented Features:\n\n1. **Reusable Validation Functions (src/utils/validation.ts)**:\n   - Email, phone number, required field, min/max length validations\n   - Date and date range validations\n   - Domain format validation\n   - Validation function composition (combineValidations)\n   - Complete object field validation (validateFields)\n   - Debounced validation (createDebouncedValidator)\n   - Automatic phone number formatting (formatPhoneNumber)\n\n2. **Error Boundary System (src/components/common/ErrorBoundary.tsx)**:\n   - React Error Boundary class component\n   - Environment-specific error information display (dev/prod)\n   - User-friendly error UI (retry, refresh, navigate home)\n   - HOC wrapper (withErrorBoundary)\n   - Manual error handling hook (useErrorHandler)\n   - Detailed component stack trace (dev environment)\n\n3. **Local Storage Persistence (WizardContext Extension)**:\n   - Automatic saving/loading of form data and current step\n   - Data restoration on page refresh\n   - Added clearFormData, resetWizard, exportFormData functions\n   - Robust exception handling (try-catch)\n\n4. **Enhanced User Experience**:\n   - Data loss warning on page unload (beforeunload event)\n   - ErrorBoundary applied to NewRequestWizard\n   - Separated error handling for dev/prod environments\n\n5. **Integration with Existing Validation**:\n   - Integrated with existing validation in TalentInfoStep, WorkHistoryStep, TargetCompaniesStep, QuestionsStep\n   - Maintained real-time inline error messages\n   - Preserved step-specific validation logic\n\nComprehensive validation has been implemented across all wizard steps, with runtime error handling and local storage persistence added to create a robust and user-friendly form system.\n</info added on 2025-06-24T15:20:45.793Z>",
+            "status": "done",
+            "testStrategy": "Test validation rules across all steps, verify error messages display correctly, test error boundaries by forcing errors, and verify form state is preserved after page refresh."
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "title": "Consent Page Implementation",
+        "description": "Create the consent page where talents can review and approve reference check requests.",
+        "details": "Create ConsentPage.tsx with the following features:\n\n1. **Request Information Display**:\n   - Show details about the requesting company\n   - Display the talent's information that will be shared\n   - List the companies that will receive the reference check\n\n2. **Privacy Policy Section**:\n   - Clear explanation of how data will be used\n   - Checkbox to confirm understanding and agreement\n\n3. **Electronic Signature**:\n   - Field for typing name as electronic signature\n   - Date stamp\n\n4. **Action Buttons**:\n   - Approve button (enabled only when all required fields are completed)\n   - Decline button\n   - Loading states for both actions\n\n5. **Token Validation**:\n   - Validate the token from URL parameter\n   - Show error message for invalid or expired tokens\n   - Redirect to appropriate page after submission\n\nImplement mock functions for approving and declining that simulate API calls with loading states.",
+        "testStrategy": "Test form validation to ensure all required fields must be completed before submission. Verify that token validation works correctly with valid and invalid tokens. Test both approval and decline flows. Check responsive layout at different screen sizes.",
+        "priority": "medium",
+        "dependencies": [
+          4,
+          6
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create ConsentPage component structure and token validation",
+            "description": "Set up the basic structure of the ConsentPage component with routing and token validation logic",
+            "dependencies": [],
+            "details": "Create ConsentPage.tsx with a functional component structure. Implement token validation logic that extracts the token from URL parameters, validates it, and handles invalid/expired tokens with appropriate error messages. Set up the page layout with placeholder sections for all required content. Include a loading state while token validation is in progress.",
+            "status": "pending",
+            "testStrategy": "Test token extraction from URL, validation logic with valid/invalid/expired tokens, and proper error message display for invalid tokens."
+          },
+          {
+            "id": 2,
+            "title": "Implement Request Information Display section",
+            "description": "Create the section that displays details about the requesting company, talent information to be shared, and recipient companies",
+            "dependencies": [
+              1
+            ],
+            "details": "Create a component that displays the requesting company details (name, logo, etc.), clearly lists what talent information will be shared, and shows all companies that will receive the reference check. Use appropriate styling to make this information easily scannable. Fetch this data based on the validated token from the previous step.",
+            "status": "pending",
+            "testStrategy": "Test rendering with different data scenarios, verify all required information is displayed correctly, and check responsive layout."
+          },
+          {
+            "id": 3,
+            "title": "Implement Privacy Policy and Electronic Signature sections",
+            "description": "Create the privacy policy explanation with agreement checkbox and the electronic signature field with date stamp",
+            "dependencies": [
+              1
+            ],
+            "details": "Develop the privacy policy section with clear explanations of data usage and a checkbox for user agreement. Implement form validation to ensure the checkbox must be checked. Create the electronic signature section with a text input field for the user's name and an automatic date stamp. Ensure both sections have proper validation and error states.",
+            "status": "pending",
+            "testStrategy": "Test form validation logic, verify checkbox state management, test signature field with various inputs, and confirm date stamp accuracy."
+          },
+          {
+            "id": 4,
+            "title": "Implement Action Buttons with state management",
+            "description": "Create Approve and Decline buttons with proper state management and loading states",
+            "dependencies": [
+              1,
+              2,
+              3
+            ],
+            "details": "Implement Approve and Decline buttons with appropriate styling. The Approve button should only be enabled when all required fields are completed (privacy policy checkbox checked and signature provided). Create mock functions for both actions that simulate API calls with loading states. Implement state management to track form completion status and control button enablement.",
+            "status": "pending",
+            "testStrategy": "Test button enable/disable logic based on form completion, verify loading states display correctly during mock API calls, and test both approval and decline flows."
+          },
+          {
+            "id": 5,
+            "title": "Implement post-submission logic and integrate all components",
+            "description": "Handle post-submission redirects and integrate all components into the final ConsentPage",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "details": "Implement redirect logic after form submission (both approve and decline cases). Integrate all previously created components into the final ConsentPage. Ensure proper error handling throughout the page. Add final styling and responsive design adjustments. Implement any remaining edge cases like handling network errors during submission.",
+            "status": "pending",
+            "testStrategy": "Test the complete user flow from page load to submission, verify redirects work correctly for both approve and decline paths, test error handling for network issues, and perform cross-browser testing."
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "title": "Response Page Implementation",
+        "description": "Create the page where respondents can provide feedback for reference checks with auto-save functionality.",
+        "details": "Create RespondPage.tsx with the following features:\n\n1. **Talent Information Display**:\n   - Show talent name, position, and work history\n   - Display requesting company information\n\n2. **Questionnaire Form**:\n   - Render each question with appropriate input type (text area, rating, etc.)\n   - Group questions by category if applicable\n   - Validation for required questions\n\n3. **Auto-save Functionality**:\n   - Implement debounced auto-save as user types\n   - Show save status indicator (saving, saved, error)\n   - Store draft responses in localStorage as backup\n\n4. **Action Buttons**:\n   - Submit button (enabled only when all required questions are answered)\n   - Save Draft button\n   - Loading states for both actions\n\n5. **Token Validation**:\n   - Validate the token from URL parameter\n   - Show error message for invalid or expired tokens\n   - Redirect to appropriate page after submission\n\nImplement mock functions for submitting and saving drafts that simulate API calls with loading states.",
+        "testStrategy": "Test form validation to ensure all required questions must be answered before submission. Verify that auto-save functionality works correctly. Test token validation with valid and invalid tokens. Test draft saving and loading from localStorage. Check responsive layout at different screen sizes.",
+        "priority": "medium",
+        "dependencies": [
+          4,
+          6
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement RespondPage component structure and token validation",
+            "description": "Create the basic structure of the RespondPage component and implement token validation from URL parameters.",
+            "dependencies": [],
+            "details": "Create RespondPage.tsx with a basic layout structure. Implement token validation logic that extracts the token from URL parameters, validates it (mock this functionality initially), and handles invalid/expired token scenarios with appropriate error messages. Set up the page routing and implement redirection logic for after submission. Create a context or state management solution to track the overall form state.",
+            "status": "pending",
+            "testStrategy": "Test token extraction from URL, validation logic with valid/invalid tokens, and proper error message display for invalid tokens."
+          },
+          {
+            "id": 2,
+            "title": "Implement talent information display section",
+            "description": "Create the section that displays talent information, position details, work history, and requesting company information.",
+            "dependencies": [],
+            "details": "Create a TalentInfoSection component that receives talent data as props. Design a clean layout to display talent name, position applied for, relevant work history, and the company requesting the reference check. Implement responsive design for this section. Mock the data initially, but structure it to easily connect to real API data later.",
+            "status": "pending",
+            "testStrategy": "Test rendering with different mock data scenarios, verify all required information is displayed correctly, and check responsive behavior."
+          },
+          {
+            "id": 3,
+            "title": "Implement questionnaire form with validation",
+            "description": "Create the dynamic questionnaire form that renders different question types and implements validation for required fields.",
+            "dependencies": [],
+            "details": "Create a QuestionnaireForm component that renders questions dynamically based on their type (text area, rating scale, etc.). Implement form state management using React hooks. Group questions by category if specified in the question data. Add validation logic for required questions and visual indicators for validation errors. Create reusable components for each question type.",
+            "status": "pending",
+            "testStrategy": "Test rendering of different question types, validation behavior for required fields, and proper grouping of questions by category."
+          },
+          {
+            "id": 4,
+            "title": "Implement auto-save functionality with localStorage backup",
+            "description": "Add debounced auto-save functionality that saves form progress as the user types and maintains a backup in localStorage.",
+            "dependencies": [],
+            "details": "Implement a debounce utility function to limit save frequency. Create a service to handle saving form data (mock API calls initially). Add visual indicators for save status (saving, saved, error). Implement localStorage backup functionality that stores draft responses and can restore them if the page is reloaded. Handle potential localStorage errors and limitations.",
+            "status": "pending",
+            "testStrategy": "Test debounce timing, save status indicator transitions, localStorage backup and restoration, and error handling scenarios."
+          },
+          {
+            "id": 5,
+            "title": "Implement action buttons and final submission flow",
+            "description": "Add Submit and Save Draft buttons with appropriate loading states and implement the final submission flow.",
+            "dependencies": [],
+            "details": "Create action buttons with loading state indicators. Implement the Submit button logic that validates all required fields before submission and is disabled until all requirements are met. Create the Save Draft functionality that explicitly saves the current state. Implement mock API functions for both actions with simulated network delays to test loading states. Add confirmation dialogs where appropriate and implement the post-submission redirect flow.",
+            "status": "pending",
+            "testStrategy": "Test button disabled states based on form validation, loading state indicators during submission, error handling during submission failures, and the complete submission flow including redirects."
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "title": "Results Page Implementation",
+        "description": "Create the results page showing the summary and detailed responses for a reference check request.",
+        "details": "Create two components:\n\n1. **ResultPage.tsx** (summary view):\n   - Response status overview (number of responses, pending, rejected)\n   - Summary statistics of ratings across all responses\n   - Key highlights from text responses\n   - Charts or graphs visualizing the aggregate data\n   - Link to detailed view\n\n2. **ResultDetailPage.tsx** (detailed view):\n   - List of all respondents with their status\n   - Expandable sections for each respondent's answers\n   - Option to view individual responses in full\n   - PDF export button (mock functionality)\n   - Comparison view of responses to the same question\n\nBoth pages should:\n- Validate the request ID from URL parameter\n- Show loading state while fetching data\n- Display error message for invalid request IDs\n- Use mock data for development\n\nImplement responsive designs that work well on both desktop and mobile devices.",
+        "testStrategy": "Test that the pages correctly display data from mock responses. Verify that charts and visualizations render correctly. Test the PDF export functionality (mock). Check that navigation between summary and detail views works correctly. Test responsive layout at different screen sizes.",
+        "priority": "medium",
+        "dependencies": [
+          3,
+          4,
+          6
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create data models and API service for results",
+            "description": "Define TypeScript interfaces for result data and implement a service to fetch and process the data from the API or mock data source.",
+            "dependencies": [],
+            "details": "Create types for ReferenceCheckResult, ResponseSummary, and DetailedResponse. Implement a ResultsService class with methods for fetching summary and detailed data. Include error handling and data transformation logic. Set up mock data that matches the defined interfaces for development.",
+            "status": "pending",
+            "testStrategy": "Unit test the service methods with mock data to ensure proper data transformation and error handling."
+          },
+          {
+            "id": 2,
+            "title": "Implement ResultPage summary view component",
+            "description": "Create the ResultPage component showing the summary view of reference check responses with statistics and visualizations.",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement ResultPage.tsx with URL parameter validation, loading states, and error handling. Create subcomponents for response status overview, summary statistics, and data visualizations. Use a charting library (like Chart.js or Recharts) for visualizing aggregate data. Include navigation to the detailed view. Ensure responsive design with appropriate styling for mobile and desktop.",
+            "status": "pending",
+            "testStrategy": "Write component tests to verify proper rendering of different states (loading, error, data). Test URL parameter handling and navigation to detailed view."
+          },
+          {
+            "id": 3,
+            "title": "Implement ResultDetailPage component",
+            "description": "Create the ResultDetailPage component showing detailed responses from all respondents with expandable sections.",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement ResultDetailPage.tsx with URL parameter validation, loading states, and error handling. Create a respondent list component with status indicators. Implement expandable sections for each respondent's answers. Add functionality to view individual responses in full. Ensure responsive design with appropriate styling for mobile and desktop.",
+            "status": "pending",
+            "testStrategy": "Test component rendering for different states and verify expandable sections work correctly. Test navigation between summary and detailed views."
+          },
+          {
+            "id": 4,
+            "title": "Add data visualization components",
+            "description": "Create reusable chart and graph components for visualizing aggregate response data in the summary view.",
+            "dependencies": [
+              2
+            ],
+            "details": "Implement chart components for different data visualization needs (bar charts for ratings, pie charts for completion status, etc.). Create a highlights component to display key text responses. Ensure charts are responsive and accessible. Add tooltips and interactive elements to enhance user experience. Implement proper loading and error states for visualizations.",
+            "status": "pending",
+            "testStrategy": "Test chart components with various data scenarios. Verify responsive behavior and accessibility compliance."
+          },
+          {
+            "id": 5,
+            "title": "Implement PDF export and comparison view",
+            "description": "Add PDF export functionality and a comparison view for responses to the same question across respondents.",
+            "dependencies": [
+              3
+            ],
+            "details": "Integrate a PDF generation library (like jsPDF or react-pdf) for exporting detailed results. Implement a mock export function that generates a basic PDF with result data. Create a comparison view component that displays responses to the same question from different respondents side by side. Add filtering and sorting options for the comparison view. Ensure all new functionality maintains responsive design principles.",
+            "status": "pending",
+            "testStrategy": "Test PDF generation with different data scenarios. Verify comparison view correctly displays and aligns responses from different respondents."
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "created": "2025-06-24T11:00:47.823Z",
+      "updated": "2025-06-24T15:23:29.469Z",
+      "description": "Tasks for master context"
+    }
+  }
+}
