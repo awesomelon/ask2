@@ -24,8 +24,9 @@ export const RequestDetailPage: React.FC<RequestDetailPageProps> = ({
 }) => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { request, responses, stats, loading, error, refetch } =
-    useRequestDetail(id || "");
+  const { request, stats, loading, error, refetch } = useRequestDetail(
+    id || ""
+  );
 
   const handleNavigate = (path: string) => {
     if (onNavigate) {

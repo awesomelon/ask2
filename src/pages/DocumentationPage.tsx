@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Button,
   Input,
@@ -12,167 +12,22 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
-  CardFooter,
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
   Badge,
   Progress,
   Alert,
   AlertTitle,
   AlertDescription,
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
   TooltipProvider,
   Spinner,
 } from "../components/ui";
-import { useToast } from "../hooks/use-toast";
-import {
-  Info,
-  CheckCircle,
-  AlertTriangle,
-  AlertCircle,
-  Copy,
-  Check,
-} from "lucide-react";
-
-interface CodeBlockProps {
-  code: string;
-  language?: string;
-}
-
-const CodeBlock: React.FC<CodeBlockProps> = ({ code, language = "tsx" }) => {
-  const [copied, setCopied] = useState(false);
-
-  const copyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(code);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error("Failed to copy code: ", err);
-    }
-  };
-
-  return (
-    <div className="relative bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto">
-      <button
-        onClick={copyToClipboard}
-        className="absolute top-2 right-2 p-2 rounded-md bg-gray-800 hover:bg-gray-700 transition-colors"
-        aria-label="Copy code"
-      >
-        {copied ? (
-          <Check className="h-4 w-4 text-green-400" />
-        ) : (
-          <Copy className="h-4 w-4" />
-        )}
-      </button>
-      <pre className="text-sm overflow-x-auto">
-        <code className={`language-${language}`}>{code}</code>
-      </pre>
-    </div>
-  );
-};
-
-interface ComponentSectionProps {
-  title: string;
-  description: string;
-  children: React.ReactNode;
-  code: string;
-  accessibilityFeatures?: string[];
-}
-
-const ComponentSection: React.FC<ComponentSectionProps> = ({
-  title,
-  description,
-  children,
-  code,
-  accessibilityFeatures = [],
-}) => {
-  return (
-    <Card className="mb-8">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <span>{title}</span>
-          <Badge variant="secondary" className="text-xs">
-            Component
-          </Badge>
-        </CardTitle>
-        <CardDescription>{description}</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-6">
-        <div>
-          <h4 className="text-sm font-semibold mb-3 text-gray-700">Preview</h4>
-          <div className="p-6 border rounded-lg bg-gray-50">{children}</div>
-        </div>
-
-        {accessibilityFeatures.length > 0 && (
-          <div>
-            <h4 className="text-sm font-semibold mb-3 text-green-700 flex items-center gap-2">
-              <CheckCircle className="h-4 w-4" />
-              Accessibility Features
-            </h4>
-            <ul className="space-y-2">
-              {accessibilityFeatures.map((feature, index) => (
-                <li
-                  key={index}
-                  className="flex items-start gap-2 text-sm text-gray-600"
-                >
-                  <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                  {feature}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        <div>
-          <h4 className="text-sm font-semibold mb-3 text-gray-700">
-            Code Example
-          </h4>
-          <CodeBlock code={code} />
-        </div>
-      </CardContent>
-    </Card>
-  );
-};
 
 export function DocumentationPage() {
   const [progress, setProgress] = useState(33);
-  const { toast } = useToast();
 
   const handleProgressUpdate = () => {
     const newProgress =
       progress >= 100 ? 0 : progress + 20 > 100 ? 100 : progress + 20;
     setProgress(newProgress);
-  };
-
-  const showToast = (
-    type: "default" | "success" | "warning" | "destructive"
-  ) => {
-    const toastConfig = {
-      default: { title: "알림", description: "기본 알림 메시지입니다." },
-      success: {
-        title: "성공",
-        description: "작업이 성공적으로 완료되었습니다.",
-      },
-      warning: { title: "경고", description: "주의가 필요한 상황입니다." },
-      destructive: { title: "오류", description: "문제가 발생했습니다." },
-    };
-
-    toast({
-      variant: type === "default" ? "default" : type,
-      ...toastConfig[type],
-    });
   };
 
   return (

@@ -1,15 +1,4 @@
-import React from "react";
-import {
-  Home,
-  Inbox,
-  UserPlus,
-  BarChart3,
-  Settings,
-  HelpCircle,
-  ChevronRight,
-  Building2,
-  Users,
-} from "lucide-react";
+import { Home, Inbox, UserPlus, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useInbox } from "@/hooks/useInbox";
 
@@ -106,21 +95,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
     //     },
     //   ],
     // },
-  ];
-
-  const bottomItems: SidebarItem[] = [
-    {
-      id: "help",
-      label: "도움말",
-      icon: <HelpCircle className="h-5 w-5" />,
-      path: "/help",
-    },
-    {
-      id: "settings",
-      label: "설정",
-      icon: <Settings className="h-5 w-5" />,
-      path: "/settings",
-    },
   ];
 
   const handleItemClick = (item: SidebarItem) => {

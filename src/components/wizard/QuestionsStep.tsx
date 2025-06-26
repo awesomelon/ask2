@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useWizard } from "@/contexts/WizardContext";
-import type { Question } from "@/contexts/WizardContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,7 +10,6 @@ import {
   MessageSquareIcon,
   ToggleLeftIcon,
   ToggleRightIcon,
-  GripVerticalIcon,
   CheckIcon,
 } from "lucide-react";
 

@@ -30,7 +30,6 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({
   className,
   user,
-  currentPath = "/dashboard",
   onLogout,
   onNavigate,
 }) => {

@@ -20,7 +20,7 @@ interface ResponsePageProps {
   onNavigate?: (path: string) => void;
 }
 
-export const ResponsePage: React.FC<ResponsePageProps> = ({ onNavigate }) => {
+export const ResponsePage: React.FC<ResponsePageProps> = () => {
   const { token } = useParams<{ token: string }>();
   const { toast } = useToast();
   const [isSubmitted, setIsSubmitted] = useState(false);

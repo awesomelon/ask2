@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Button,
   Input,
@@ -12,7 +12,6 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
-  CardFooter,
   Dialog,
   DialogContent,
   DialogDescription,
@@ -36,7 +35,6 @@ import {
   Spinner,
 } from "@/components/ui";
 import { AccessibilityAuditor } from "@/components/accessibility";
-import { AlertCircle, CheckCircle2, Info } from "lucide-react";
 import { useToast } from "../../hooks/use-toast";
 
 export function ComponentDemo() {

@@ -42,7 +42,6 @@ export const InboxPage: React.FC<InboxPageProps> = ({ onNavigate }) => {
     inboxItems,
     stats,
     loading,
-    error,
     getItemsByStatus,
     filterItems,
     currentUserEmail,
@@ -147,19 +146,6 @@ export const InboxPage: React.FC<InboxPageProps> = ({ onNavigate }) => {
         <div className="h-8 w-48 bg-gray-200 rounded animate-pulse" />
         <div className="h-32 bg-gray-200 rounded animate-pulse" />
         <div className="h-64 bg-gray-200 rounded animate-pulse" />
-      </div>
-    );
-  }
-
-  // 에러 상태
-  if (error) {
-    return (
-      <div className="space-y-6">
-        <h1 className="text-3xl font-bold text-gray-900">수신함</h1>
-        <Alert variant="destructive">
-          <AlertTriangle className="h-4 w-4" />
-          <AlertDescription>{error}</AlertDescription>
-        </Alert>
       </div>
     );
   }

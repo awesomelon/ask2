@@ -1,5 +1,3 @@
-import type { ReferenceRequest } from "@/types";
-
 // 평판 질문 타입 정의
 export interface ReferenceQuestion {
   id: string;

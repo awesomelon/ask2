@@ -1,16 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
-import {
-  mockResponseTokens,
-  isTokenExpired,
-  type ResponseToken,
-} from "@/mocks/responseTokens";
-import {
-  mockReferenceRequests,
-  findMockRequestById,
-  mockUsers,
-} from "@/mocks/referenceRequests";
+import { mockResponseTokens, isTokenExpired } from "@/mocks/responseTokens";
+import { findMockRequestById } from "@/mocks/referenceRequests";
 import { isTokenRejected, getRejectionInfo } from "@/mocks/rejectionRecords";
-import type { ReferenceRequest } from "@/types";
 
 // 수신함 아이템 타입 정의
 export interface InboxItem {
@@ -36,7 +27,6 @@ const CURRENT_USER_EMAIL = "kim.dev@innovationlab.co.kr"; // 김개발자로 가
 
 export const useInbox = () => {
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   // 현재 사용자에게 발송된 토큰들 필터링
   const userTokens = useMemo(() => {
@@ -90,10 +80,6 @@ export const useInbox = () => {
       // 요청한 회사/사람 정보 찾기
       const requestingCompany = request.companies.find(
         (company) => company.organization.id === token.companyId
-      );
-
-      const requestingUser = mockUsers.find(
-        (user) => user.email === token.respondentEmail
       );
 
       items.push({
@@ -185,7 +171,6 @@ export const useInbox = () => {
     inboxItems,
     stats,
     loading,
-    error,
     getItemsByStatus,
     filterItems,
     currentUserEmail: CURRENT_USER_EMAIL,

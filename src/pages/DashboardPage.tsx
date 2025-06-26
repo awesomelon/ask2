@@ -16,7 +16,7 @@ interface DashboardPageProps {
 }
 
 export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
-  const { stats, recentRequests, recentReceivedRequests, loading, error } =
+  const { stats, recentRequests, recentReceivedRequests, loading } =
     useDashboard();
 
   const handleReceivedAction = (status: string, token: string) => {
@@ -49,16 +49,6 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
           ))}
         </div>
         <div className="h-64 bg-gray-200 rounded animate-pulse" />
-      </div>
-    );
-  }
-
-  // 에러 상태
-  if (error) {
-    return (
-      <div className="space-y-6">
-        <h1 className="text-3xl font-bold text-gray-900">대시보드</h1>
-        <p className="text-red-600">{error}</p>
       </div>
     );
   }

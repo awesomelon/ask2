@@ -1,11 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
-import {
-  mockReferenceRequests,
-  getMockRequestsByStatus,
-  mockUsers,
-} from "@/mocks/referenceRequests";
+import { mockReferenceRequests, mockUsers } from "@/mocks/referenceRequests";
 import { useInbox } from "./useInbox";
-import type { ReferenceRequest } from "@/types";
 
 // 대시보드 통계 타입
 interface DashboardStats {
@@ -32,7 +27,6 @@ const CURRENT_USER_ID = "user-001"; // 박매니저로 가정 (대부분의 요�
 
 export const useDashboard = () => {
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   // 수신함 데이터 가져오기
   const { inboxItems, stats: inboxStats } = useInbox();
@@ -142,7 +136,6 @@ export const useDashboard = () => {
     recentReceivedRequests,
     inboxStats,
     loading,
-    error,
     currentUser,
     totalUserRequests: userRequests.length,
     totalReceivedRequests: inboxItems.length,

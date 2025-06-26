@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
   XCircle,
@@ -17,13 +17,12 @@ interface RejectPageProps {
   onNavigate?: (path: string) => void;
 }
 
-export const RejectPage: React.FC<RejectPageProps> = ({ onNavigate }) => {
+export const RejectPage: React.FC<RejectPageProps> = () => {
   const { token } = useParams<{ token: string }>();
   const { toast } = useToast();
   const [isValidatingToken, setIsValidatingToken] = useState(true);
   const [tokenValidation, setTokenValidation] = useState<any>(null);
   const [requestInfo, setRequestInfo] = useState<any>(null);
-  const [rejectionReason, setRejectionReason] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -41,7 +40,7 @@ export const RejectPage: React.FC<RejectPageProps> = ({ onNavigate }) => {
   const [customReason, setCustomReason] = useState("");
 
   // 토큰 검증 및 데이터 로드
-  React.useEffect(() => {
+  useEffect(() => {
     const validateTokenAndLoadData = async () => {
       if (!token) return;
 

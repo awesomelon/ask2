@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useWizard } from "@/contexts/WizardContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,9 +16,11 @@ import {
 } from "lucide-react";
 
 // Mock API 호출 시뮬레이션
-const mockSubmitRequest = (
-  data: any
-): Promise<{ success: boolean; requestId?: string; error?: string }> => {
+const mockSubmitRequest = (): Promise<{
+  success: boolean;
+  requestId?: string;
+  error?: string;
+}> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       // 90% 성공률
@@ -59,7 +61,7 @@ export const ConfirmationStep: React.FC = () => {
     setSubmitResult(null);
 
     try {
-      const result = await mockSubmitRequest(formData);
+      const result = await mockSubmitRequest();
       setSubmitResult(result);
     } catch (error) {
       setSubmitResult({
@@ -215,7 +217,7 @@ export const ConfirmationStep: React.FC = () => {
         <CardContent>
           {formData.workHistory.length > 0 ? (
             <div className="space-y-4">
-              {formData.workHistory.map((work, index) => (
+              {formData.workHistory.map((work) => (
                 <div
                   key={work.id}
                   className="border-l-4 border-l-blue-500 pl-4"

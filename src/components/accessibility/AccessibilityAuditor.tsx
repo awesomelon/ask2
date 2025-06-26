@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "../ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import { Badge } from "../ui/badge";
@@ -6,7 +6,6 @@ import { Progress } from "../ui/progress";
 import { Alert, AlertTitle, AlertDescription } from "../ui/alert";
 import {
   auditAccessibility,
-  getAccessibilityScore,
   announceToScreenReader,
 } from "../../utils/accessibility";
 import { CheckCircle, AlertTriangle, AlertCircle, Search } from "lucide-react";

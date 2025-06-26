@@ -99,7 +99,7 @@ const mockAPI = {
     };
   },
 
-  async getCurrentUser(token: string): Promise<User> {
+  async getCurrentUser(): Promise<User> {
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     return {
@@ -203,9 +203,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
           // Try to refresh token if it expires in less than 5 minutes
           try {
             const newTokens = await mockAPI.refreshToken(tokens.refreshToken);
-            const currentUser = await mockAPI.getCurrentUser(
-              newTokens.accessToken
-            );
+            const currentUser = await mockAPI.getCurrentUser();
 
             const rememberMe =
               localStorage.getItem(STORAGE_KEYS.REMEMBER_ME) === "true";

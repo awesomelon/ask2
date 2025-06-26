@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useWizard } from "@/contexts/WizardContext";
-import type { WorkHistory } from "@/contexts/WizardContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -8,8 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 export const WorkHistoryStep: React.FC = () => {
-  const { formData, addWorkHistory, updateWorkHistory, removeWorkHistory } =
-    useWizard();
+  const { formData, addWorkHistory, removeWorkHistory } = useWizard();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isAdding, setIsAdding] = useState(false);
   const [newEntry, setNewEntry] = useState({
@@ -120,7 +118,7 @@ export const WorkHistoryStep: React.FC = () => {
       {formData.workHistory.length > 0 && (
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">등록된 근무 이력</h3>
-          {formData.workHistory.map((history, index) => (
+          {formData.workHistory.map((history) => (
             <Card key={history.id} className="relative">
               <CardHeader className="pb-3">
                 <div className="flex justify-between items-start">

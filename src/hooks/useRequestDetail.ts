@@ -5,7 +5,6 @@ import {
   findMockRequestById,
   findMockResponsesByRequestId,
   getResponseStatsByRequestId,
-  getTokensByRequestId,
 } from "@/mocks";
 
 export interface RequestDetailStats {
