@@ -80,32 +80,32 @@ export const Sidebar: React.FC<SidebarProps> = ({
       icon: <UserPlus className="h-5 w-5" />,
       path: "/requests",
     },
-    {
-      id: "analytics",
-      label: "분석 리포트",
-      icon: <BarChart3 className="h-5 w-5" />,
-      path: "/analytics",
-    },
-    {
-      id: "organization",
-      label: "조직 관리",
-      icon: <Building2 className="h-5 w-5" />,
-      path: "/organization",
-      children: [
-        {
-          id: "members",
-          label: "구성원",
-          icon: <Users className="h-4 w-4" />,
-          path: "/organization/members",
-        },
-        {
-          id: "settings-org",
-          label: "조직 설정",
-          icon: <Settings className="h-4 w-4" />,
-          path: "/organization/settings",
-        },
-      ],
-    },
+    // {
+    //   id: "analytics",
+    //   label: "분석 리포트",
+    //   icon: <BarChart3 className="h-5 w-5" />,
+    //   path: "/analytics",
+    // },
+    // {
+    //   id: "organization",
+    //   label: "조직 관리",
+    //   icon: <Building2 className="h-5 w-5" />,
+    //   path: "/organization",
+    //   children: [
+    //     {
+    //       id: "members",
+    //       label: "구성원",
+    //       icon: <Users className="h-4 w-4" />,
+    //       path: "/organization/members",
+    //     },
+    //     {
+    //       id: "settings-org",
+    //       label: "조직 설정",
+    //       icon: <Settings className="h-4 w-4" />,
+    //       path: "/organization/settings",
+    //     },
+    //   ],
+    // },
   ];
 
   const bottomItems: SidebarItem[] = [
@@ -221,11 +221,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* Bottom Navigation */}
-      <div className="border-t border-gray-200 p-2">
+      {/* <div className="border-t border-gray-200 p-2">
         <nav className="space-y-1">
           {bottomItems.map((item) => renderSidebarItem(item))}
         </nav>
-      </div>
+      </div> */}
 
       {/* Collapse/Expand Toggle (Desktop only) */}
       <div className="border-t border-gray-200 p-2">

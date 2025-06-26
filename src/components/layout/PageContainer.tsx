@@ -90,12 +90,14 @@ export const PageSection: React.FC<PageContainerProps> = (props) => (
 export const CenteredContainer: React.FC<{
   children: React.ReactNode;
   className?: string;
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "xl" | "2xl";
 }> = ({ children, className, size = "md" }) => {
   const sizeMap = {
     sm: "md",
     md: "lg",
     lg: "xl",
+    xl: "2xl",
+    "2xl": "3xl",
   } as const;
 
   return (
